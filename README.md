@@ -1,4 +1,4 @@
-README for COMP20 semester group project for gorup 7: Josh Berl, David McConnell, Julie Sanduski, Rex Umezuruike
+README for COMP20 semester group project for group 7: Josh Berl, David McConnell, Julie Sanduski, Rex Umezuruike
 
 • Project Title
 
