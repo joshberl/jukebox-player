@@ -2,7 +2,8 @@ README for COMP20 semester group project for group 7: Josh Berl, David McConnell
 
 • Project Title
 
-• Problem Statement
+• Problem Statement: 
+Different types of crowds like different types of music. One DJ cannot typically appeal to all types of crowds. A DJ can never just guess what most people at that specific party would be interested in listening to. 
 
 • How do you solve the problem
 
@@ -13,3 +14,4 @@ README for COMP20 semester group project for group 7: Josh Berl, David McConnell
 • Any algorithms or special techniques that will be necessary
 
 • Electronic mockups of what will be developed using wireframes
+
