@@ -17,5 +17,3 @@ Pick 5: (1) Geolocation
 Will be collecting songs that will be put onto a queue, upvotes and downvotes (value of these votes are relative to size of party) 
 
 Algorithms: List (Dynamic Array), Upvoting/Downvoting Algorithm
-
-
