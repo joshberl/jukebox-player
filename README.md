@@ -1,17 +1,21 @@
 README for COMP20 semester group project for group 7: Josh Berl, David McConnell, Julie Sanduski, Rex Umezuruike
 
-• Project Title
+Project title – 
 
-• Problem Statement: 
-Different types of crowds like different types of music. One DJ cannot typically appeal to all types of crowds. A DJ can never just guess what most people at that specific party would be interested in listening to. 
+Problem statement – Different types of crowds like different types of music. One DJ cannot typically appeal to all types of crowds. A DJ can never just guess what most people at that specific party would be interested in listening to. 
 
-• How do you solve the problem
+Solve the problem – This DJ App will finally create a link from our DJ to our crowd of people by allowing people to add songs to the queue to be played. 
 
-• List of features that will be implemented
+Implementation – We will use a Spotify API for playing the songs, and MusixMatch API for displaying lyrics and an Echonest API for information about songs 
 
-• What data will the prototype be using and collecting
+Pick 5: (1) Geolocation 
+(2) Front-end framework (Boostrap)
+(3) Push notifications (upvote 
+(4) Client-side storage (keeps track of what was listened to)
+(5) Reporting with charts and graphs 
 
-• Any algorithms or special techniques that will be necessary
+Will be collecting songs that will be put onto a queue, upvotes and downvotes (value of these votes are relative to size of party) 
 
-• Electronic mockups of what will be developed using wireframes
+Algorithms: List (Dynamic Array), Upvoting/Downvoting Algorithm
+
 
