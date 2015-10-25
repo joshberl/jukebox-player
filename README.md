@@ -17,3 +17,5 @@ Pick 5: (1) Geolocation
 Will be collecting songs that will be put onto a queue, upvotes and downvotes (value of these votes are relative to size of party) 
 
 Algorithms: List (Dynamic Array), Upvoting/Downvoting Algorithm
+#Comments by Ming
+* You fell into a trap I didn't want you to fall into. You listed a bunch for technologies for features but for what will they be used for what?  _What_ will charts and graphs be used for?
