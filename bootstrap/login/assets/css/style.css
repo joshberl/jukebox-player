@@ -169,8 +169,7 @@ img { max-width: 100%; }
 
 .footer {
 	padding-top: 150px;
-	padding-bottom: 80px;
-	color: #4D4DC0;
+	color: white;
 	font-weight: bold;
 }
 
@@ -178,7 +177,7 @@ img { max-width: 100%; }
 	padding-left: 30%;
 	padding-right: 30%;
 	padding-top: 80px;
-	color: #80E82C;
+	color: white;
 	font-weight: bold;
 }
 
