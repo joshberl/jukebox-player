@@ -18,3 +18,6 @@ Goals for next week:
 - <B>Create an html song search and player</B>
 - Figure out accounts situation
 - Create a tangible schedule/outline/pseudocode for the remainder of the semester
+
+#Comments by Ming
+* A few teams are working with Spotify API.  Perhaps I will have teams talk and learn from each other.
