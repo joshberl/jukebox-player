@@ -19,3 +19,23 @@ Will be collecting songs that will be put onto a queue, upvotes and downvotes (v
 Algorithms: List (Dynamic Array), Upvoting/Downvoting Algorithm
 #Comments by Ming
 * You fell into a trap I didn't want you to fall into. You listed a bunch for technologies for features but for what will they be used for what?  _What_ will charts and graphs be used for?
+
++
++
++
++Notes on implementation ideas
++
++No accounts: local storage has this person voted on this song? If so, they cannot vote again
++Add song from Spotify API
++Location services - map to see nearby DJs
++Displays queue of songs, voting can adjust the ordered
++Now playing: Song, link to musixmatch lyrics/related artists
++Displays 5 recently played songs
++Notification if your song is up next
++
++TODO:
++Song PLaying
++Queue of Songs
++Upvote/Downvote on Songs
++
++
