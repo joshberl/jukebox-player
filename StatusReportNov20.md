@@ -10,3 +10,6 @@ Challenges:
 Goals for next week:
 - Create a simple html song search and player
 - Implement accounts in the database
+- 
+#Comments by Ming
+* Accounts in database?  User accounts?  Why do that?
