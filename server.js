@@ -14,21 +14,21 @@ app.use(bodyParser.json());
 var code_array = [];
 
 var new_code = function() {
-	var code = String(0);
+	var code = String(Math.floor((Math.random() * 10000) + 1));
 	var code_is_being_used = false;
 	for (x in code_array) {
-		if (x === code) {
+		if (code_array[x] === code) {
 			code_is_being_used = true;
 			break;
 		}
 	}
-	// if (code_is_being_used) {
-	// 	code = new_code();
-	// }
-	// else if (!code_is_being_used) {
-		//add the code to the code_array
+	if (code_is_being_used) {
+		code = new_code();
+	}
+	else if (!code_is_being_used) {
+		code_array.push(code);
 		return code;
-	// }
+	}
 };
 
 
@@ -47,6 +47,15 @@ app.get('/newcode', function(req, res) {
 	var code = new_code(); //some random string or random number for a code?
 	res.status(200);
 	res.send(code);
+});
+
+app.get('/allcodes', function(req, res) {
+	var list = "";
+	for (x in code_array) {
+		list += code_array[x] + " ";
+	}
+	res.status(200);
+	res.send(list);
 });
 
 app.get('/queue', function(req, res) {
@@ -140,6 +149,32 @@ app.get('/bootstrap/login/assets/js/scripts.js', function(req, res) {
 	res.sendFile('/bootstrap/login/assets/js/scripts.js', options);
 });
 
+app.get('/bootstrap/login/assets/font-awesome/fonts/fontawesome-webfont.woff2', function(req, res) {
+	var options = {
+		root: __dirname,
+		dotfiles: 'deny'
+	};
+	res.status(200);
+	res.sendFile('/bootstrap/login/assets/font-awesome/fonts/fontawesome-webfont.woff2', options);
+});
+
+app.get('/bootstrap/login/assets/img/backgrounds/Homepage_bg.jpg', function(req, res) {
+	var options = {
+		root: __dirname,
+		dotfiles: 'deny'
+	};
+	res.status(200);
+	res.sendFile('/bootstrap/login/assets/img/backgrounds/Homepage_bg.jpg', options);
+});
+
+app.get('/bootstrap/login/assets/font-awesome/fonts/fontawesome-webfont.woff', function(req, res) {
+	var options = {
+		root: __dirname,
+		dotfiles: 'deny'
+	};
+	res.status(200);
+	res.sendFile('/bootstrap/login/assets/font-awesome/fonts/fontawesome-webfont.woff', options);
+});
 
 app.listen(app.get('port'), function() {
   	console.log('Jukebox is running on port', app.get('port'));
