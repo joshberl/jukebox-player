@@ -66,6 +66,8 @@ app.get('/queue', function(req, res) {
 
 });
 
+/*Bootstrap gets*/
+
 app.get('/bootstrap/login/assets/bootstrap/css/bootstrap.min.css', function(req, res) {
 	var options = {
 		root: __dirname,
@@ -74,6 +76,70 @@ app.get('/bootstrap/login/assets/bootstrap/css/bootstrap.min.css', function(req,
 	res.status(200);
 	res.sendFile('/bootstrap/login/assets/bootstrap/css/bootstrap.min.css', options);
 });
+
+app.get('/bootstrap/login/assets/font-awesome/css/font-awesome.min.css', function(req, res) {
+	var options = {
+		root: __dirname,
+		dotfiles: 'deny'
+	};
+	res.status(200);
+	res.sendFile('/bootstrap/login/assets/font-awesome/css/font-awesome.min.css', options);
+});
+
+app.get('/bootstrap/login/assets/css/form-elements.css', function(req, res) {
+	var options = {
+		root: __dirname,
+		dotfiles: 'deny'
+	};
+	res.status(200);
+	res.sendFile('/bootstrap/login/assets/css/form-elements.css', options);
+});
+
+app.get('/bootstrap/login/assets/css/style.css', function(req, res) {
+	var options = {
+		root: __dirname,
+		dotfiles: 'deny'
+	};
+	res.status(200);
+	res.sendFile('/bootstrap/login/assets/css/style.css', options);
+});
+
+app.get('/bootstrap/login/assets/js/jquery-1.11.1.min.js', function(req, res) {
+	var options = {
+		root: __dirname,
+		dotfiles: 'deny'
+	};
+	res.status(200);
+	res.sendFile('/bootstrap/login/assets/js/jquery-1.11.1.min.js', options);
+});
+
+app.get('/bootstrap/login/assets/bootstrap/js/bootstrap.min.js', function(req, res) {
+	var options = {
+		root: __dirname,
+		dotfiles: 'deny'
+	};
+	res.status(200);
+	res.sendFile('/bootstrap/login/assets/bootstrap/js/bootstrap.min.js', options);
+});
+
+app.get('/bootstrap/login/assets/js/jquery.backstretch.min.js', function(req, res) {
+	var options = {
+		root: __dirname,
+		dotfiles: 'deny'
+	};
+	res.status(200);
+	res.sendFile('/bootstrap/login/assets/js/jquery.backstretch.min.js', options);
+});
+
+app.get('/bootstrap/login/assets/js/scripts.js', function(req, res) {
+	var options = {
+		root: __dirname,
+		dotfiles: 'deny'
+	};
+	res.status(200);
+	res.sendFile('/bootstrap/login/assets/js/scripts.js', options);
+});
+
 
 app.listen(app.get('port'), function() {
   	console.log('Jukebox is running on port', app.get('port'));
