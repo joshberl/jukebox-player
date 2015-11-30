@@ -66,6 +66,15 @@ app.get('/queue', function(req, res) {
 
 });
 
+app.get('/bootstrap/login/assets/bootstrap/css/bootstrap.min.css', function(req, res) {
+	var options = {
+		root: __dirname,
+		dotfiles: 'deny'
+	};
+	res.status(200);
+	res.sendFile('/bootstrap/login/assets/bootstrap/css/bootstrap.min.css', options);
+});
+
 app.listen(app.get('port'), function() {
   	console.log('Jukebox is running on port', app.get('port'));
 });
