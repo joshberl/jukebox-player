@@ -1,0 +1,7 @@
+{
+  "name": "Juke-box",
+  "description": "Express-JS app built with Spotify API",
+  "repository": "https://github.com/tuftsdev/comp20-f2015-team7",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "express", "static"]
+}
