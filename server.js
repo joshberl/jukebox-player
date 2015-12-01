@@ -31,7 +31,7 @@ var new_code = function() {
 	// }
 };
 
-
+var test = "";
 
 
 app.get('/', function(req, res) {
