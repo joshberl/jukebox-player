@@ -135,6 +135,15 @@ app.get('/bootstrap/login/assets/bootstrap/js/bootstrap.min.js', function(req, r
 	res.sendFile('/bootstrap/login/assets/bootstrap/js/bootstrap.min.js', options);
 });
 
+app.get('/bootstrap/login/assets/js/jquery-2.1.4.min.js', function(req, res) {
+	var options = {
+		root: __dirname,
+		dotfiles: 'deny'
+	};
+	res.status(200);
+	res.sendFile('/bootstrap/login/assets/js/jquery-2.1.4.min.js', options);
+});
+
 app.get('/bootstrap/login/assets/js/jquery.backstretch.min.js', function(req, res) {
 	var options = {
 		root: __dirname,
