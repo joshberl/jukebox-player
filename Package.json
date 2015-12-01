@@ -1,7 +1,7 @@
 {
   "name": "JukeBox",
   "version": "5.0.0",
-  "description": "Server for Jukebox",
+  "description": "Server for Jukebox okay",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
