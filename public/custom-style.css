@@ -19,3 +19,18 @@
 .code_num {
 	font-style: bold;
 }
+
+.footer {
+	padding-top: 150px;
+	color: white;
+	font-weight: bold;
+}
+
+.information {
+	padding-left: 30%;
+	padding-right: 30%;
+	padding-top: 80px;
+	color: white;
+	font-weight: bold;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}

@@ -166,23 +166,6 @@ img { max-width: 100%; }
 }
 
 
-/***** Other Page Elements *****/
-
-.footer {
-	padding-top: 150px;
-	color: white;
-	font-weight: bold;
-}
-
-.information {
-	padding-left: 30%;
-	padding-right: 30%;
-	padding-top: 80px;
-	color: white;
-	font-weight: bold;
-}
-
-
 /***** Media queries *****/
 
 @media (min-width: 992px) and (max-width: 1199px) {}
