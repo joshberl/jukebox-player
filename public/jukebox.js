@@ -1,7 +1,7 @@
 var newcode = function() {
 	code = document.getElementById('code');
 	var curr = new Date();
-	if ((curr - Date.parse(localStorage['timestamp']) > 3600000) || localStorage['timestamp'] === undefined) {
+	if ((curr - Date.parse(localStorage['timestamp']) > 3600) || localStorage['timestamp'] === undefined) {
 		$.get('/../newcode', function(data, status) {
 			code.innerHTML = "Your new code is: <a>" + data + "</a>";
 			localStorage.setItem("code", data);
