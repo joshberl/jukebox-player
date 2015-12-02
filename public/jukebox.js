@@ -1,31 +1,40 @@
 var newcode = function() {
 	code = document.getElementById('code');
-	if (localStorage['code'] === undefined) {
+	var curr = new Date();
+	if ((curr - Date.parse(localStorage['timestamp']) > 3600) || localStorage['timestamp'] === undefined) {
 		$.get('/../newcode', function(data, status) {
-			console.log(data);
 			code.innerHTML = "Your new code is: <a>" + data + "</a>";
 			localStorage.setItem("code", data);
+			localStorage.setItem("timestamp", curr);
 		});
 	}
 	else {
-		code.innerHTML = "You just asked for a code! It's: <a>" + localStorage['code'] + "</a>";
+		code.innerHTML = "You Already Have a Code: <a>" + localStorage['code'] + "</a>";
 	}
-	console.log(localStorage['code']);
 };
 
 var startqueue = function() {
+	var curr = new Date();
 	queue_message = document.getElementById('queue_message');
-	if (localStorage['code'] != undefined) {
+	if (localStorage['code'] != undefined && curr - Date.parse(localStorage['timestamp']) < 3600000) {
 		window.location.assign('../queue?code=' + localStorage['code']);
 	}
 	else {
-		queue_message.innerHTML = 'Please click on "Get a New Code" above';
+		queue_message.innerHTML = 'Please click on "Get a New Code"';
 	}
 }
 
 $('input').change(function() {
+	var queue_attempt = document.getElementById('queue_attempt');
 	var $to_send = $(this);
 	var code = $to_send[0]['value'];
-	
-	console.log(code);
+	$.get('../validcode?code=' + code, function(data, status) {
+		if (data == 'is valid') {
+			window.location.assign('../queue?code=' + code);
+		}
+		else {
+			queue_attempt.innerHTML = "Not a valid code. Either enter a valid code or create your own";
+			$('input').val('');
+		}
+	});
 })

@@ -7,7 +7,13 @@
 #queue_message {
 	text-align: center;
 	font-size: 14pt;
-	padding-bottom: 20px;
+	padding-bottom: 22px;
+}
+
+#queue_attempt {
+	text-align: center;
+	font-size: 14pt;
+	padding-bottom: 22px;
 }
 
 .code_num {

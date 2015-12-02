@@ -58,6 +58,25 @@ app.get('/allcodes', function(req, res) {
 	res.send(list);
 });
 
+app.get('/validcode', function(req, res) {
+	var code = req.query.code;
+
+	var validcode = false;
+	for (x in code_array) {
+		if (code == code_array[x]) {
+			validcode = true;
+		}
+	}
+
+	res.status(200);
+	if (validcode) {
+		res.send('is valid');
+	}
+	else {
+		res.send('not valid');
+	}
+});
+
 app.get('/queue', function(req, res) {
 	var code = req.query.code;
 
