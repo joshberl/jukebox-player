@@ -1,7 +1,13 @@
 #code {
 	text-align: center;
 	font-size: 14pt;
-	padding-bottom: 25px;
+	padding-bottom: 22px;
+}
+
+#queue_message {
+	text-align: center;
+	font-size: 14pt;
+	padding-bottom: 20px;
 }
 
 .code_num {

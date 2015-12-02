@@ -13,3 +13,19 @@ var newcode = function() {
 	console.log(localStorage['code']);
 };
 
+var startqueue = function() {
+	queue_message = document.getElementById('queue_message');
+	if (localStorage['code'] != undefined) {
+		window.location.assign('../queue?code=' + localStorage['code']);
+	}
+	else {
+		queue_message.innerHTML = 'Please click on "Get a New Code" above';
+	}
+}
+
+$('input').change(function() {
+	var $to_send = $(this);
+	var code = $to_send[0]['value'];
+	
+	console.log(code);
+})
