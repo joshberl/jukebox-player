@@ -31,6 +31,15 @@ var new_code = function() {
 	}
 };
 
+var validcode = function(code) {
+	for (x in code_array) {
+		if (code == code_array[x]) {
+			return true;
+		}
+	}
+	return false;
+}
+
 
 
 
@@ -61,15 +70,10 @@ app.get('/allcodes', function(req, res) {
 app.get('/validcode', function(req, res) {
 	var code = req.query.code;
 
-	var validcode = false;
-	for (x in code_array) {
-		if (code == code_array[x]) {
-			validcode = true;
-		}
-	}
+	var valid = validcode(code);
 
 	res.status(200);
-	if (validcode) {
+	if (valid) {
 		res.send('is valid');
 	}
 	else {
@@ -79,6 +83,8 @@ app.get('/validcode', function(req, res) {
 
 app.get('/queue', function(req, res) {
 	var code = req.query.code;
+
+	var valid = validcode(code);
 
 	//check to see if the code is in code_array/database (?)
 
