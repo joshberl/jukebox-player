@@ -219,6 +219,17 @@ app.get('/bootstrap/login/assets/font-awesome/fonts/fontawesome-webfont.woff', f
 	res.sendFile('/bootstrap/login/assets/font-awesome/fonts/fontawesome-webfont.woff', options);
 });
 
+app.get('/bootstrap/login/assets/img/backgrounds/JukeBox_text.jpg', function(req, res) {
+	var options = {
+		root: __dirname,
+		dotfiles: 'deny'
+	};
+	res.status(200);
+	res.sendFile('/bootstrap/login/assets/img/backgrounds/JukeBox_text.jpg', options);
+});
+
+
+
 app.listen(app.get('port'), function() {
   	console.log('Jukebox is running on port', app.get('port'));
 });
