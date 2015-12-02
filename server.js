@@ -14,7 +14,12 @@ app.use(bodyParser.json());
 var code_array = [];
 
 var new_code = function() {
-	var code = String(Math.floor((Math.random() * 10000) + 1));
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for(var i=0; i < 5; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
 	var code_is_being_used = false;
 	for (x in code_array) {
 		if (code_array[x] === code) {
