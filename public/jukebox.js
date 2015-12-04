@@ -37,4 +37,8 @@ $('input').change(function() {
 			$('input').val('');
 		}
 	});
-})
+});
+
+$.get('https://api.spotify.com/v1/search?query=dancing+in+the+moonlight&offset=20&limit=20&type=track', function(data, status) {
+	console.log(data);
+});

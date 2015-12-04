@@ -31,52 +31,21 @@
 
     </head>
 
-    <body>  
-
+    <body>
         <div class="logo">JukeBox</div>
 
-        <!-- Top content -->
-        <div class="top-content">
-
-            <div class="inner-bg">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3 form-box">
-                            <div class="form-top">
-                                <h3>Start Making Your Playlist</h3>
-                            </div>
-                            <div class="form-bottom">
-                                <div id="code">
-                                </div>
-                                <div class="form-group">
-                                    <button class="btn" onclick=newcode()>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get a New Code&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                                </div>
-                                <div id="queue_message">
-                                </div>
-                                <div class="form-group">
-                                    <button class="btn" onclick=startqueue()>Start a Queue With Your Code</button>
-                                </div>
-                                <div id="queue_attempt">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="queue-join" placeholder="Join a Queue">
-                                </div>
-                            </div>
+        <div class='inner-bg'>
+            <div class='container'>
+                <div class="col-sm-3 col-md-5 pull-right">
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Add to Queue">
+                        <div class="input-group-btn">
+                            <button class="btn" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                         </div>
-                    </div>
-                    <div class="row">
-                    </div>
                 </div>
-                <div class="information">
-                    JukeBox is a location-based web application that allows users to dynamically add songs from Spotify onto a queue that any user with Spotify Premium can host and play.
-                </div>
-                <div class="footer">
-                  © 2015
-                </div>
-            </div>
-            
-        </div>
-
+            </form>
+        </div>       
 
         <!-- Javascript -->
         <script src="bootstrap/login/assets/js/jquery-2.1.4.min.js"></script>
