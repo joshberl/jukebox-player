@@ -46,22 +46,6 @@ var validcode = function(code) {
 	return false;
 }
 
-spotify.search({ type: 'track', query: 'dancing in the moonlight' }, function(err, data) {
-    // if ( err ) {
-    //     console.log('Error occurred: ' + err);
-    //     return;
-    // }
-    for (x in data['tracks']['items']) {
-    	console.log(data['tracks']['items'][x]['name']);
-    	console.log(data['tracks']['items'][x]['album']['name']);
-    	console.log(data['tracks']['items'][x]['artists'][0]['name']);
-    }
-    console.log(data);
-    console.log("what");
-});
-
-
-
 app.get('/', function(req, res) {
 	var options = {
 		root: __dirname,
