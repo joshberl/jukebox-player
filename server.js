@@ -123,156 +123,23 @@ app.get('/queue', function(req, res) {
 
 });
 
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
-//////////////*** Bootstrap gets ***//////////////
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
+app.get('/searchsong', function(req, res) {
+	var song = req.query.song;
+	spotify.search({ type: 'track', query: song }, function(err, data) {
+		var text = "";
 
-app.get('/bootstrap/login/assets/bootstrap/css/bootstrap.min.css', function(req, res) {
-	var options = {
-		root: __dirname,
-		dotfiles: 'deny'
-	};
-	res.status(200);
-	res.sendFile('/bootstrap/login/assets/bootstrap/css/bootstrap.min.css', options);
+	    for (x in data['tracks']['items']) {
+	    	text += data['tracks']['items'][x]['name'] + " – " + data['tracks']['items'][x]['artists'][0]['name'] + "<br>"; 
+	    	console.log(data['tracks']['items'][x]['name']);
+	    	console.log(data['tracks']['items'][x]['album']['name']);
+	    	console.log(data['tracks']['items'][x]['artists'][0]['name']);
+	    }
+	    console.log(data);
+	    console.log("what");
+	    res.status(200);
+	    res.send(text);
+	});
 });
-
-app.get('/bootstrap/login/assets/font-awesome/css/font-awesome.min.css', function(req, res) {
-	var options = {
-		root: __dirname,
-		dotfiles: 'deny'
-	};
-	res.status(200);
-	res.sendFile('/bootstrap/login/assets/font-awesome/css/font-awesome.min.css', options);
-});
-
-app.get('/bootstrap/login/assets/css/form-elements.css', function(req, res) {
-	var options = {
-		root: __dirname,
-		dotfiles: 'deny'
-	};
-	res.status(200);
-	res.sendFile('/bootstrap/login/assets/css/form-elements.css', options);
-});
-
-app.get('/bootstrap/login/assets/css/style.css', function(req, res) {
-	var options = {
-		root: __dirname,
-		dotfiles: 'deny'
-	};
-	res.status(200);
-	res.sendFile('/bootstrap/login/assets/css/style.css', options);
-});
-
-app.get('/bootstrap/login/assets/js/jquery-1.11.1.min.js', function(req, res) {
-	var options = {
-		root: __dirname,
-		dotfiles: 'deny'
-	};
-	res.status(200);
-	res.sendFile('/bootstrap/login/assets/js/jquery-1.11.1.min.js', options);
-});
-
-app.get('/bootstrap/login/assets/bootstrap/js/bootstrap.min.js', function(req, res) {
-	var options = {
-		root: __dirname,
-		dotfiles: 'deny'
-	};
-	res.status(200);
-	res.sendFile('/bootstrap/login/assets/bootstrap/js/bootstrap.min.js', options);
-});
-
-app.get('/bootstrap/login/assets/js/jquery-2.1.4.min.js', function(req, res) {
-	var options = {
-		root: __dirname,
-		dotfiles: 'deny'
-	};
-	res.status(200);
-	res.sendFile('/bootstrap/login/assets/js/jquery-2.1.4.min.js', options);
-});
-
-app.get('/bootstrap/login/assets/js/jquery.backstretch.min.js', function(req, res) {
-	var options = {
-		root: __dirname,
-		dotfiles: 'deny'
-	};
-	res.status(200);
-	res.sendFile('/bootstrap/login/assets/js/jquery.backstretch.min.js', options);
-});
-
-app.get('/bootstrap/login/assets/js/scripts.js', function(req, res) {
-	var options = {
-		root: __dirname,
-		dotfiles: 'deny'
-	};
-	res.status(200);
-	res.sendFile('/bootstrap/login/assets/js/scripts.js', options);
-});
-
-app.get('/bootstrap/login/assets/font-awesome/fonts/fontawesome-webfont.woff2', function(req, res) {
-	var options = {
-		root: __dirname,
-		dotfiles: 'deny'
-	};
-	res.status(200);
-	res.sendFile('/bootstrap/login/assets/font-awesome/fonts/fontawesome-webfont.woff2', options);
-});
-
-app.get('/bootstrap/login/assets/img/backgrounds/Homepage_bg.jpg', function(req, res) {
-	var options = {
-		root: __dirname,
-		dotfiles: 'deny'
-	};
-	res.status(200);
-	res.sendFile('/bootstrap/login/assets/img/backgrounds/Homepage_bg.jpg', options);
-});
-
-app.get('/bootstrap/login/assets/font-awesome/fonts/fontawesome-webfont.woff', function(req, res) {
-	var options = {
-		root: __dirname,
-		dotfiles: 'deny'
-	};
-	res.status(200);
-	res.sendFile('/bootstrap/login/assets/font-awesome/fonts/fontawesome-webfont.woff', options);
-});
-
-app.get('/bootstrap/login/assets/img/backgrounds/JukeBox_bg.gif', function(req, res) {
-	var options = {
-		root: __dirname,
-		dotfiles: 'deny'
-	};
-	res.status(200);
-	res.sendFile('/bootstrap/login/assets/img/backgrounds/JukeBox_bg.gif', options);
-});
-
-app.get('/bootstrap/login/assets/bootstrap/fonts/glyphicons-halflings-regular.woff2', function(req, res) {
-	var options = {
-		root: __dirname,
-		dotfiles: 'deny'
-	};
-	res.status(200);
-	res.sendFile('/bootstrap/login/assets/bootstrap/fonts/glyphicons-halflings-regular.woff2', options);
-});
-
-app.get('/bootstrap/login/assets/bootstrap/fonts/glyphicons-halflings-regular.woff ', function(req, res) {
-	var options = {
-		root: __dirname,
-		dotfiles: 'deny'
-	};
-	res.status(200);
-	res.sendFile('/bootstrap/login/assets/bootstrap/fonts/glyphicons-halflings-regular.woff', options);
-});
-
-app.get('/bootstrap/login/assets/bootstrap/fonts/glyphicons-halflings-regular.ttf', function(req, res) {
-	var options = {
-		root: __dirname,
-		dotfiles: 'deny'
-	};
-	res.status(200);
-	res.sendFile('/bootstrap/login/assets/bootstrap/fonts/glyphicons-halflings-regular.ttf', options);
-});
-
 
 app.listen(app.get('port'), function() {
   	console.log('Jukebox is running on port', app.get('port'));

@@ -37,6 +37,7 @@
 }
 
 .logo {
+	cursor: pointer;
 	position: fixed;
 	font-family: verdana;
 	font-size: 35px;
