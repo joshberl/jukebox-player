@@ -109,20 +109,31 @@ app.get('/queue', function(req, res) {
 
 app.get('/searchsong', function(req, res) {
 	var song = req.query.song;
-	spotify.search({ type: 'track', query: song }, function(err, data) {
-		var text = "";
+	if (song != "") {
+		spotify.search({ type: 'track', query: song }, function(err, data) {
+			if (!err) {
+				var text = "";
 
-	    for (x in data['tracks']['items']) {
-	    	text += data['tracks']['items'][x]['name'] + " – " + data['tracks']['items'][x]['artists'][0]['name'] + "<br>"; 
-	    	console.log(data['tracks']['items'][x]['name']);
-	    	console.log(data['tracks']['items'][x]['album']['name']);
-	    	console.log(data['tracks']['items'][x]['artists'][0]['name']);
-	    }
-	    console.log(data);
-	    console.log("what");
-	    res.status(200);
-	    res.send(text);
-	});
+			    for (x in data['tracks']['items']) {
+			    	text += data['tracks']['items'][x]['name'] + " – " + data['tracks']['items'][x]['artists'][0]['name'] + "<br>"; 
+			    	// console.log(data['tracks']['items'][x]['name']);
+			    	// console.log(data['tracks']['items'][x]['album']['name']);
+			    	// console.log(data['tracks']['items'][x]['artists'][0]['name']);
+			    }
+			    // console.log(data);
+			    res.status(200);
+			    res.send(text);
+			}
+			else {
+				res.status(200);
+				res.send("An error occurred, please try again");
+			}
+		});
+	}
+	else {
+		res.status(200);
+		res.send("Please enter something to search");
+	}
 });
 
 app.listen(app.get('port'), function() {
