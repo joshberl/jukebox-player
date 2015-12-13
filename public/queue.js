@@ -34,6 +34,21 @@ var display_song_data = function(song) {
 	}
 }
 
+var intervalID;
+$(".btn").hover(function(){
+    var $this = $(this);
+    intervalID = setInterval(function() {
+       scroll($this);
+    }, 100);
+}, function() {
+    clearInterval(intervalID);
+});
+
+function scroll(ele){
+    var s = ele.text().substr(1)+ele.text().substr(0,1);
+    ele.text(s);
+}
+
 // var searchsong = function(req, res) {
 // 	var song = req.query.song;
 // 	if (song != "") {
