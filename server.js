@@ -130,7 +130,7 @@ app.get('/searchsong', function(req, res) {
 			    res.send(text);
 			}
 			else {
-				res.status(200);
+				res.status(400);
 				res.send("An error occurred, please try again");
 			}
 		});
