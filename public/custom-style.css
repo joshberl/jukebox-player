@@ -51,6 +51,47 @@
 	position: fixed;
 	padding-left: 60px;
 	padding-top: 20px;
+<<<<<<< HEAD
 	align: left;
 	color: blue;
 }
+=======
+<<<<<<< HEAD
+}
+
+.queue {
+	position: relative;
+	width: auto;
+	height: 70px;
+	border-radius: 5px;
+	background-color: white;
+}
+
+.empty_queue {
+	position: relative;
+	vertical-align: middle;
+	top: 30%;
+}
+
+.queue_elem {
+	background-image: url("jukebox-wireframe.png");
+	position: relative;
+	width: auto;
+	border-radius: 5px;
+	padding-bottom: 20px;
+	height: 70px;
+}
+
+.ellipsis
+{
+    text-overflow: ellipsis;
+}
+
+.btn-add-song
+{
+	max-width: 100%
+=======
+	text-align: left;
+>>>>>>> c37008e305bd4d5289b216bb500d327f2437d3a6
+}
+>>>>>>> 78b5535bb8c3a96614b4c13ff8abf8fa50dfd93c

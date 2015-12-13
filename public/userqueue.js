@@ -37,6 +37,8 @@ var display_song_data = function(song) {
 	}
 }
 
+var addtoqueue = function
+
 // var searchsong = function(req, res) {
 // 	var song = req.query.song;
 // 	if (song != "") {
