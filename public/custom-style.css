@@ -51,6 +51,7 @@
 	position: fixed;
 	padding-left: 60px;
 	padding-top: 20px;
+<<<<<<< HEAD
 }
 
 .queue {
@@ -68,4 +69,7 @@
 .btn-add-song
 {
 	max-width: 100%
+=======
+	text-align: left;
+>>>>>>> c37008e305bd4d5289b216bb500d327f2437d3a6
 }
