@@ -107,6 +107,28 @@ app.get('/queue', function(req, res) {
 
 });
 
+app.get('/userqueue', function(req, res) {
+	var code = req.query.code;
+
+	var valid = validcode(code);
+
+	//check to see if the code is in code_array/database (?)
+
+	//if it's not found return some sort of error message, tell user to generate a new code
+
+	//if it is found...
+
+	// var fileText = "";
+	var options = {
+		root: __dirname,
+		dotfiles: 'deny'
+	};
+	// fileText += '<html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Login Page</title><!-- CSS --><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500"><link rel="stylesheet" href="bootstrap/login/assets/bootstrap/css/bootstrap.min.css"><link rel="stylesheet" href="bootstrap/login/assets/font-awesome/css/font-awesome.min.css"><link rel="stylesheet" href="bootstrap/login/assets/css/form-elements.css"><link rel="stylesheet" href="bootstrap/login/assets/css/style.css"><link rel="stylesheet" href="custom-style.css"><!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries --><!-- WARNING: Respond.js doesnt work if you view the page via file:// --><!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]--><!-- Favicon and touch icons --><link rel="shortcut icon" href="bootstrap/login/assets/ico/favicon.png"><link rel="apple-touch-icon-precomposed" sizes="144x144" href="bootstrap/login/assets/ico/apple-touch-icon-144-precomposed.png"><link rel="apple-touch-icon-precomposed" sizes="114x114" href="bootstrap/login/assets/ico/apple-touch-icon-114-precomposed.png"><link rel="apple-touch-icon-precomposed" sizes="72x72" href="bootstrap/login/assets/ico/apple-touch-icon-72-precomposed.png"><link rel="apple-touch-icon-precomposed" href="bootstrap/login/assets/ico/apple-touch-icon-57-precomposed.png"></head><body><div class="logo">JukeBox</div><div class="inner-bg"><div class="container"><div class="col-sm-3 col-md-5 pull-right"><form class="navbar-form" role="search"><div class="input-group"><input type="text" class="form-control" placeholder="Find a Song" name="addtoqueue"><div class="input-group-btn"><button class="btn" type="submit"><i class="glyphicon glyphicon-search"></i></button></div></div></form></div><!-- Javascript --><script src="bootstrap/login/assets/js/jquery-2.1.4.min.js"></script><script src="bootstrap/login/assets/bootstrap/js/bootstrap.min.js"></script><script src="bootstrap/login/assets/js/jquery.backstretch.min.js"></script><script src="bootstrap/login/assets/js/scripts.js"></script><script src="jukebox.js"></script><!--[if lt IE 10]><script src="assets/js/placeholder.js"></script><![endif]--></body></html>';
+	res.status(200);
+	res.sendFile('/public/userqueue.html', options);
+
+});
+
 app.get('/searchsong', function(req, res) {
 	var song = req.query.song;
 	if (song != "") {
