@@ -53,6 +53,13 @@
 	padding-top: 20px;
 }
 
+.queue {
+	background-image: url("jukebox-wireframe.png");
+	position: relative;
+	width: auto;
+	height: 200px;
+}
+
 .ellipsis
 {
     text-overflow: ellipsis;
