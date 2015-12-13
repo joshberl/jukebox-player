@@ -38,7 +38,6 @@ var display_song_data = function(song) {
 };
 
 var addtoqueue = function(id) {
-	console.log(id);
 	var queue = document.getElementById('queue');
 	var empty_queue = document.getElementById('empty_queue');
 	$.get('/lookupsong?id=' + id, function(data, status) {
