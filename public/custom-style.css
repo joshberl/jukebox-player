@@ -50,6 +50,7 @@
 <<<<<<< HEAD
 .song_search {
 	max-width: inherit;
+}
 =======
 .song-search {
 	position: fixed;
@@ -69,7 +70,7 @@
 	width: auto;
 	height: 70px;
 	border-radius: 5px;
-	background-color: white;
+	background-color: red;
 }
 
 #empty_queue {
