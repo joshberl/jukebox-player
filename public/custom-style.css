@@ -62,24 +62,33 @@
 #queue {
 	position: relative;
 	width: auto;
+}
+
+#empty_queue {
+	position: relative;
 	height: 70px;
 	border-radius: 5px;
 	background-color: white;
 }
 
-#empty_queue {
-	position: relative;
+#empty_queue_text {
 	vertical-align: middle;
 	top: 30%;
 }
 
 .queue_elem {
-	background-image: url("jukebox-wireframe.png");
 	position: relative;
+	background-position: center;
+	vertical-align: middle;
+	top: 30%;
 	width: auto;
 	border-radius: 5px;
-	padding-bottom: 20px;
+	margin-bottom: 20px;
 	height: 70px;
+}
+
+.queue_img {
+	width: ;
 }
 
 .ellipsis

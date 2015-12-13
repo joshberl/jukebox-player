@@ -42,17 +42,17 @@ var addtoqueue = function(id) {
 	var queue = document.getElementById('queue');
 	var empty_queue = document.getElementById('empty_queue');
 	$.get('/lookupsong?id=' + id, function(data, status) {
-		var song = parse_songs(data);
-		console.log(song);
 		if (empty_queue != null) {
 			if (empty_queue.innerHTML == 'Queue currently empty. Search a song to add to the queue.') {
-				queue.innerHTML = '<div class="queue_elem">hello</div>';
+				queue.style.backgroundcolor = "none";
+				queue.innerHTML = "<div class=queue_elem style='background-image: url(" + data.art[0].url + ")';>" + data.title + " – " + data.artist + " - " + data.album + "</div>";
 			}
 		}
 		else {
 			console.log(data);
-			queue.innerHTML += "okay";
+			queue.innerHTML += "<div class=queue_elem style='background-image: url(" + data.art[0].url + ")';>" + data.title + " – " + data.artist + " - " + data.album + "</div>";
 		}
+		console.log(data.art[0].url);
 	});
 };
 
