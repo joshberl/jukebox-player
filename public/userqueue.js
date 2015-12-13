@@ -31,18 +31,21 @@ var display_song_data = function(song) {
 		//console.log(song.title);
 		var text = "";
 		text += (song.title) + " – " + (song.artist) + " - " + (song.album) + "<br>";
-		var button = "<button class=\"btn\" onclick=addtoqueue(" + song.id + ")>" + text + "</button>";
-		console.log(song.id);
+		var button = "<button class='btn pull-left' onclick=addtoqueue('" + song.id+"')>" + text + "</button>";
+		console.log(button);
 		return button;
 	}
 };
 
 var addtoqueue = function(id) {
+	console.log(id);
 	var queue = document.getElementById('queue');
+	var empty_queue = document.getElementById('empty_queue');
 	$.get('/searchsong?song=' + id, function(data, status) {
-		console.log(id);
-		if (queue.innerHTML == '<span class="empty_queue">Queue currently empty. Search a song to add to the queue.</span>') {
-			queue.innerHTML = '<div class="queue_elem">hello</div>'
+		if (empty_queue != null) {
+			if (empty_queue.innerHTML == 'Queue currently empty. Search a song to add to the queue.') {
+				queue.innerHTML = '<div class="queue_elem">hello</div>';
+			}
 		}
 		else {
 			queue.innerHTML += "okay";

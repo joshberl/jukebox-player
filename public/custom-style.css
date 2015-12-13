@@ -47,14 +47,11 @@
 	color: white;
 }
 
-.song-search {
-	position: fixed;
-	padding-left: 60px;
-	padding-top: 20px;
-<<<<<<< HEAD
+.song_search {
+	max-width: inherit;
 }
 
-.queue {
+#queue {
 	position: relative;
 	width: auto;
 	height: 70px;
@@ -62,7 +59,7 @@
 	background-color: white;
 }
 
-.empty_queue {
+#empty_queue {
 	position: relative;
 	vertical-align: middle;
 	top: 30%;
