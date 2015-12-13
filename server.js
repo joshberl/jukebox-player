@@ -4,6 +4,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var validator = require('validator');
 var spotify = require('spotify');
+var $ = require('jquery');
 
 var app = express();
 
@@ -127,6 +128,37 @@ app.get('/userqueue', function(req, res) {
 	res.status(200);
 	res.sendFile('/public/userqueue.html', options);
 
+});
+
+app.get('/lookupsong', function(req, res) {
+	var songid = req.query.id;
+	console.log(songid);
+	$('.get')('https://api.spotify.com/v1/tracks/', function(data, status) {
+		console.log(data);
+		if (!err) {
+			// var text = "";
+		 //    for (x in data['tracks']['items']) {
+		 //    	var queueid = data['tracks']['items'][x]['id'];
+		 //    	var queueuri = data['tracks']['items'][x]['uri'];
+		 //    	var queuetitle = data['tracks']['items'][x]['name'];
+		 //    	var queueartist = data['tracks']['items'][x]['artists'][0]['name'];
+		 //    	var queuealbum = data['tracks']['items'][x]['album']['name'];
+		 //    	var queueart = data['tracks']['items'][x]['images'];
+		 //    	var queueobj = {"title": queuetitle, "artist": queueartist, "album": queuealbum, "art": queueart, "id": queueid, "uri": queueuri};
+		 //    	// console.log(data['tracks']['items'][x]['name']);
+		 //    	// console.log(data['tracks']['items'][x]['album']['name']);
+		 //    	// console.log(data['tracks']['items'][x]['artists'][0]['name']);
+		 //    	// i++;
+		 //    }
+		 //    //console.log(queuesongs);
+		 //    res.status(200);
+		 //    res.send(queueobj);
+		}
+		else {
+			// res.status(400);
+			// res.send("An error occurred, please try again");
+		}
+	});
 });
 
 app.get('/searchsong', function(req, res) {

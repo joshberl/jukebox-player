@@ -25,13 +25,49 @@ var parse_songs = function(songlist) {
 }
 
 var display_song_data = function(song) {
+	//console.log(song);
 	if (song) {
+		//console.log(song.title);
 		var text = "";
 		text += (song.title) + " – " + (song.artist) + " - " + (song.album) + "<br>";
-		console.log(text);
-		var button = "<button class=\"btn\" onclick=addtoqueue(song)>" + text + "</button>";
+		var button = "<button class='btn pull-left' onclick=addtoqueue('" + song.id+"')>" + text + "</button>";
+		console.log(button);
 		return button;
 	}
+};
+
+var addtoqueue = function(id) {
+	console.log(id);
+	var queue = document.getElementById('queue');
+	var empty_queue = document.getElementById('empty_queue');
+	$.get('/lookupsong?id=' + id, function(data, status) {
+		var song = parse_songs(data);
+		console.log(song);
+		if (empty_queue != null) {
+			if (empty_queue.innerHTML == 'Queue currently empty. Search a song to add to the queue.') {
+				queue.innerHTML = '<div class="queue_elem">hello</div>';
+			}
+		}
+		else {
+			console.log(data);
+			queue.innerHTML += "okay";
+		}
+	});
+};
+
+var intervalID;
+$(".btn").hover(function(){
+    var $this = $(this);
+    intervalID = setInterval(function() {
+       scroll($this);
+    }, 100);
+}, function() {
+    clearInterval(intervalID);
+});
+
+function scroll(ele){
+    var s = ele.text().substr(1)+ele.text().substr(0,1);
+    ele.text(s);
 }
 
 // var searchsong = function(req, res) {

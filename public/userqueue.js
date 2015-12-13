@@ -41,13 +41,16 @@ var addtoqueue = function(id) {
 	console.log(id);
 	var queue = document.getElementById('queue');
 	var empty_queue = document.getElementById('empty_queue');
-	$.get('/searchsong?song=' + id, function(data, status) {
+	$.get('/lookupsong?id=' + id, function(data, status) {
+		var song = parse_songs(data);
+		console.log(song);
 		if (empty_queue != null) {
 			if (empty_queue.innerHTML == 'Queue currently empty. Search a song to add to the queue.') {
 				queue.innerHTML = '<div class="queue_elem">hello</div>';
 			}
 		}
 		else {
+			console.log(data);
 			queue.innerHTML += "okay";
 		}
 	});
