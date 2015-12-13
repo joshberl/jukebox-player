@@ -30,11 +30,28 @@ var display_song_data = function(song) {
 		//console.log(song.title);
 		var text = "";
 		text += (song.title) + " – " + (song.artist) + " - " + (song.album) + "<br>";
-		var button = "<button class='btn pull-left' onclick=addtoqueue('" + song.id+"')>" + text + "</button>";
+		var button = "<button class='scrollthis btn pull-left' onclick=addtoqueue('" + song.id+"')>" + text + "</button>";
 		console.log(button);
+
 		return button;
 	}
 };
+
+var intervalID;
+$(".scrollthis").hover(function(){
+    var $this = $(this);
+    intervalID = setInterval(function() {
+       scroll($this);
+    }, 100);
+}, function() {
+    clearInterval(intervalID);
+});
+
+function scroll(ele){
+    var s = ele.text().substr(1)+ele.text().substr(0,1);
+    ele.text(s);
+}
+
 
 var addtoqueue = function(id) {
 	console.log(id);
@@ -55,20 +72,7 @@ var addtoqueue = function(id) {
 	});
 };
 
-var intervalID;
-$(".btn").hover(function(){
-    var $this = $(this);
-    intervalID = setInterval(function() {
-       scroll($this);
-    }, 100);
-}, function() {
-    clearInterval(intervalID);
-});
 
-function scroll(ele){
-    var s = ele.text().substr(1)+ele.text().substr(0,1);
-    ele.text(s);
-}
 
 // var searchsong = function(req, res) {
 // 	var song = req.query.song;
