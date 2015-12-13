@@ -53,3 +53,12 @@
 	padding-top: 20px;
 }
 
+.ellipsis
+{
+    text-overflow: ellipsis;
+}
+
+.btn-add-song
+{
+	max-width: 100%
+}
