@@ -55,10 +55,25 @@
 }
 
 .queue {
+	position: relative;
+	width: auto;
+	height: 70px;
+	border-radius: 5px;
+	background-color: white;
+}
+
+.empty_queue {
+	position: relative;
+	vertical-align: middle;
+}
+
+.queue_elem {
 	background-image: url("jukebox-wireframe.png");
 	position: relative;
 	width: auto;
-	height: 200px;
+	border-radius: 5px;
+	padding-bottom: 20px;
+	height: 70px;
 }
 
 .ellipsis
