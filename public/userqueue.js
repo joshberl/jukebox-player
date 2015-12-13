@@ -11,7 +11,7 @@ var submit_search = function() {
 			song_search.innerHTML = "No results found";
 		}
 		else {
-			song_search.innerHTML = parse_songs(data)
+			song_search.innerHTML = parse_songs(data);
 		}
 	});
 };
@@ -23,7 +23,7 @@ var parse_songs = function(songlist) {
 		buttons += display_song_data(songlist[i]);
 	}
 	return buttons;
-}
+};
 
 var display_song_data = function(song) {
 	//console.log(song);
@@ -31,13 +31,24 @@ var display_song_data = function(song) {
 		//console.log(song.title);
 		var text = "";
 		text += (song.title) + " – " + (song.artist) + " - " + (song.album) + "<br>";
-		console.log(text);
-		var button = "<button class=\"btn\" onclick=addtoqueue(song)>" + text + "</button>";
+		var button = "<button class=\"btn\" onclick=addtoqueue(" + song.id + ")>" + text + "</button>";
+		console.log(song.id);
 		return button;
 	}
-}
+};
 
-var addtoqueue = function
+var addtoqueue = function(id) {
+	var queue = document.getElementById('queue');
+	$.get('/searchsong?song=' + id, function(data, status) {
+		console.log(id);
+		if (queue.innerHTML == '<span class="empty_queue">Queue currently empty. Search a song to add to the queue.</span>') {
+			queue.innerHTML = '<div class="queue_elem">hello</div>'
+		}
+		else {
+			queue.innerHTML += "okay";
+		}
+	});
+};
 
 // var searchsong = function(req, res) {
 // 	var song = req.query.song;
