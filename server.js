@@ -115,9 +115,13 @@ app.get('/searchsong', function(req, res) {
 				var text = "";
 				var queuesongs = [];
 			    for (x in data['tracks']['items']) {
+			    	var queueid = data['tracks']['items'][x]['id'];
+			    	var queueuri = data['tracks']['items'][x]['uri'];
 			    	var queuetitle = data['tracks']['items'][x]['name'];
 			    	var queueartist = data['tracks']['items'][x]['artists'][0]['name'];
-			    	var queueobj = {"title": queuetitle, "artist": queueartist}
+			    	var queuealbum = data['tracks']['items'][x]['album']['name'];
+			    	var queueart = data['tracks']['items'][x]['images'];
+			    	var queueobj = {"title": queuetitle, "artist": queueartist, "album": queuealbum, "art": queueart, "id": queueid, "uri": queueuri};
 			    	queuesongs.push(queueobj);
 			    	text += data['tracks']['items'][x]['name'] + " – " + data['tracks']['items'][x]['artists'][0]['name'] + "<br>"; 
 			    	// console.log(data['tracks']['items'][x]['name']);
@@ -127,7 +131,7 @@ app.get('/searchsong', function(req, res) {
 			    }
 			    //console.log(queuesongs);
 			    res.status(200);
-			    res.send(text);
+			    res.send(queuesongs);
 			}
 			else {
 				res.status(400);

@@ -11,10 +11,31 @@ var submit_search = function() {
 			queue.innerHTML = "No results found";
 		}
 		else {
-			queue.innerHTML = data;
+			queue.innerHTML = parse_songs(data)
 		}
 	});
 };
+
+var parse_songs = function(songlist) {
+	//console.log(songlist);
+	var buttons = ""
+	for (var i = 0; i < songlist.length; i++) {
+		buttons += display_song_data(songlist[i]);
+	}
+	return buttons;
+}
+
+var display_song_data = function(song) {
+	//console.log(song);
+	if (song) {
+		//console.log(song.title);
+		var text = "";
+		text += (song.title) + " – " + (song.artist) + " - " + (song.album) + "<br>";
+		console.log(text);
+		var button = "<button class=\"btn\" onclick=addtoqueue()>" + text + "</button>";
+		return button;
+	}
+}
 
 // var searchsong = function(req, res) {
 // 	var song = req.query.song;
