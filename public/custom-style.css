@@ -47,22 +47,16 @@
 	color: white;
 }
 
-<<<<<<< HEAD
 .song_search {
 	max-width: inherit;
 }
-=======
+
 .song-search {
 	position: fixed;
 	padding-left: 60px;
 	padding-top: 20px;
-<<<<<<< HEAD
 	align: left;
 	color: blue;
-}
-=======
-<<<<<<< HEAD
->>>>>>> 6f24a9f183e38fbe05bf99f5a5d0573d772c5d5e
 }
 
 #queue {
