@@ -29,7 +29,7 @@ var display_song_data = function(song) {
 		var text = "";
 		text += (song.title) + " – " + (song.artist) + " - " + (song.album) + "<br>";
 		console.log(text);
-		var button = "<button class=\"btn scroll_on_hover\" onclick=addtoqueue(song)>" + text + "</button>";
+		var button = "<button class=\"btn-add-song\" onclick=addtoqueue(song)>" + text + "</button>";
 		return button;
 	}
 }
