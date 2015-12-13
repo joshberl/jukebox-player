@@ -51,5 +51,6 @@
 	position: fixed;
 	padding-left: 60px;
 	padding-top: 20px;
-	text-align: left;
+	align: left;
+	color: blue;
 }

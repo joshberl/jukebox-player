@@ -32,7 +32,7 @@ var display_song_data = function(song) {
 		var text = "";
 		text += (song.title) + " – " + (song.artist) + " - " + (song.album) + "<br>";
 		console.log(text);
-		var button = "<button class=\"btn\" onclick=addtoqueue()>" + text + "</button>";
+		var button = "<button class=\"btn\" onclick=addtoqueue(song)>" + text + "</button>";
 		return button;
 	}
 }
