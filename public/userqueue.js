@@ -11,6 +11,7 @@ $( document ).ready(function() {
 			window.location.assign('/../');
 			break;
 		}
+		// make sure the input matches the code given before proceeding
 		if (search[i] == 'c' && search[i+1] == 'o' && search[i+2] == 'd' && search[i+3] == 'e') {
 			for (var j = 0; j < 5; j++) {
 				code += search[i+j+5];
