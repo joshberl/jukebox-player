@@ -3,22 +3,37 @@ $('input').change(function() {
 	$('input').val('');
 });
 
-console.log(window.location['search']);
-var search = window.location['search'];
-var code = "";
-for (var i = 0; i < window.location['search'].length; i++) {
-	if (search[i+9] == undefined) {
-		window.location.assign('/../');
-		break;
-	}
-	if (search[i] == 'c' && search[i+1] == 'o' && search[i+2] == 'd' && search[i+3] == 'e') {
-		for (var j = 0; j < 5; j++) {
-			code += search[i+j+5];
+$( document ).ready(function() {
+	var search = window.location['search'];
+	var code = "";
+	for (var i = 0; i < window.location['search'].length; i++) {
+		if (search[i+9] == undefined) {
+			window.location.assign('/../');
+			break;
 		}
-		document.getElementById('queueid').innerHTML = "The code for this queue is: <a><span id='code'>" + code + "</span></a>";
-		break;
+		if (search[i] == 'c' && search[i+1] == 'o' && search[i+2] == 'd' && search[i+3] == 'e') {
+			for (var j = 0; j < 5; j++) {
+				code += search[i+j+5];
+			}
+			document.getElementById('queueid').innerHTML = "The code for this queue is: <a><span id='code'>" + code + "</span></a>";
+			break;
+		}
 	}
-}
+
+	$.get('/currentqueue?code=' + document.getElementById('code').innerHTML, function(data, status) {
+		console.log(data);
+		if (data.queue[0] != null) {
+			var queue = document.getElementById('queue');
+			queue.innerHTML = "";
+			for (var i = data.queue.length - 1; i >= 0; i--) {
+				queue.innerHTML += "<div class=queue_elem style='background-image: url(" + data.queue[i].art[0].url + ")';><span class='queue_elem_text'>" + data['queue'][i]['title'] + " – " + data['queue'][i]['artist'] + " - " + data['queue'][i]['album'] + "</span></div>";
+			}
+		}
+	})
+
+});
+
+
 
 var submit_search = function() {
 	var song_search = document.getElementById('song_search');
@@ -58,14 +73,10 @@ var addtoqueue = function(id) {
 	var queue = document.getElementById('queue');
 	var empty_queue = document.getElementById('empty_queue');
 	$.get('/addsong?id=' + id + '&code=' + document.getElementById('code').innerHTML, function(data, status) {
-		if (empty_queue != null) {
-				queue.style.backgroundcolor = "none";
-				queue.innerHTML = "<div class=queue_elem style='background-image: url(" + data.art[0].url + ")';><span class='queue_elem_text'>" + data.title + " – " + data.artist + " - " + data.album + "</span></div>";
-				console.log(queue.innerHTML);
-		}
-		else {
-			console.log(data);
-			queue.innerHTML += "<div class=queue_elem style='background-image: url(" + data.art[0].url + ")';><span class='queue_elem_text'>" + data.title + " – " + data.artist + " - " + data.album + "</span></div>";
+		console.log(data.queue[0]);
+		queue.innerHTML = "";
+		for (var i = data.queue.length - 1; i >= 0; i--) {
+			queue.innerHTML += "<div class=queue_elem style='background-image: url(" + data.queue[i].art[0].url + ")';><span class='queue_elem_text'>" + data['queue'][i]['title'] + " – " + data['queue'][i]['artist'] + " - " + data['queue'][i]['album'] + "</span></div>";
 		}
 	});
 };

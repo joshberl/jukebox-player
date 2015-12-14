@@ -12,6 +12,7 @@ var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb:/
 var MongoClient = require('mongodb').MongoClient, format = require('util').format;
 var db = MongoClient.connect(mongoUri, function(error, databaseConnection) {
     db = databaseConnection;
+    //db.collection('codes').remove({});
 });
 
 app.set('port', (process.env.PORT || 5000));
@@ -32,9 +33,13 @@ var new_code = function() {
 //insertion sort because yay sorting as we insert things
 var sort = function(array, new_song) {
 	var position = 0;
-	while (postion < array.length) {
-		if (new_song.count <= array[postion].count) {
-			array.pushback(array[array.length-1]);
+	if (array.length == 0) {
+		array.push(new_song);
+		return array;
+	}
+	while (position < array.length) {
+		if (new_song.count <= array[position].count) {
+			array.push(array[array.length-1]);
 			for (var i = array.length - 2; i > position; i--) {
 				array[i] = array[i-1];
 			}
@@ -100,6 +105,22 @@ app.get('/validcode', function(req, res) {
 	});
 });
 
+app.get('/currentqueue', function(req, res) {
+	var code = req.query.code;
+	var codes = db.collection('codes');
+
+	codes.find({"code": code}).toArray(function(err, arr) {
+		if (!err) {
+			res.status(200);
+			res.send(arr[0]);
+		}
+		else {
+			res.status(500);
+			res.send("Oops! Something went wrong!");
+		}
+	});
+});
+
 app.get('/queue', function(req, res) {
 	//HAVE TO DEAL WITH SPOTIFY AUTHENTICATION
 	var code = req.query.code;
@@ -153,8 +174,8 @@ app.get('/userqueue', function(req, res) {
 
 app.get('/addsong', function(req, res) {
 	var songid = req.query.id;
-	var code = req.query.code.
-	codes = db.collection('codes');
+	var code = req.query.code;
+	var codes = db.collection('codes');
 	request.get('https://api.spotify.com/v1/tracks/' + songid, function(err, response, body) {
     	if (!err && response.statusCode == 200) {
     		data = JSON.parse(response.body);
@@ -164,10 +185,31 @@ app.get('/addsong', function(req, res) {
 	    	var queueartist = data['artists'][0]['name'];
 	    	var queuealbum = data['album']['name'];
 	    	var queueart = data['album']['images'];
-	    	var queueobj = {"title": queuetitle, "artist": queueartist, "album": queuealbum, "art": queueart, "id": queueid, "uri": queueuri, };
+	    	var queueobj = {"title": queuetitle, "artist": queueartist, "album": queuealbum, "art": queueart, "id": queueid, "uri": queueuri, "count": 1};
 
-		    res.status(200);
-		    res.send(queueobj);
+	    	codes.find({'code': code}).toArray(function(err, arr) {
+	    		console.log(code);
+	    		if (!err) {
+	    			if (arr[0] != null) {
+	    				var array = arr[0].queue;
+	    				array = sort(array, queueobj);
+	    				var new_data = {
+	    					'code': code,
+	    					'queue': array,
+	    					'last_added': new Date()
+	    				}
+	    				codes.update({'code':code}, {$set: new_data}, {upsert: true});
+	    				codes.find({'code': code}).toArray(function(err, arr) {
+	    					if (!err) {
+	    						console.log(arr[0]);
+	    						res.status(200);
+	    						res.send(arr[0]);
+	    					}
+	    				});
+	    			}
+	    		}
+	    	});
+
     	}
 		else if (err) {
 			res.status(400);
@@ -193,7 +235,6 @@ app.get('/searchsong', function(req, res) {
 			    	queuesongs.push(queueobj);
 			    }
 			    res.status(200);
-			    console.log("hey");
 			    res.send(queuesongs);
 			}
 			else {
