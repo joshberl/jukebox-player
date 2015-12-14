@@ -8,12 +8,16 @@ var request = require('request');
 
 var app = express();
 
+var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/comp20-f2015-team7';
+var MongoClient = require('mongodb').MongoClient, format = require('util').format;
+var db = MongoClient.connect(mongoUri, function(error, databaseConnection) {
+    db = databaseConnection;
+});
+
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-var code_array = [];
 
 var new_code = function() {
     var code = "";
@@ -22,29 +26,22 @@ var new_code = function() {
     for(var i=0; i < 5; i++) {
         code += possible.charAt(Math.floor(Math.random() * possible.length));
     }
-	var code_is_being_used = false;
-	for (x in code_array) {
-		if (code_array[x] === code) {
-			code_is_being_used = true;
-			break;
-		}
-	}
-	if (code_is_being_used) {
-		code = new_code();
-	}
-	else if (!code_is_being_used) {
-		code_array.push(code);
-		return code;
-	}
+	return code;
 };
 
-var validcode = function(code) {
-	for (x in code_array) {
-		if (code == code_array[x]) {
-			return true;
+//insertion sort because yay sorting as we insert things
+var sort = function(array, new_song) {
+	var position = 0;
+	while (postion < array.length) {
+		if (new_song.count <= array[postion].count) {
+			array.pushback(array[array.length-1]);
+			for (var i = array.length - 2; i > position; i--) {
+				array[i] = array[i-1];
+			}
+			array[position] = new_song;
+			return array;
 		}
 	}
-	return false;
 }
 
 app.get('/', function(req, res) {
@@ -58,80 +55,106 @@ app.get('/', function(req, res) {
 });
 
 app.get('/newcode', function(req, res) {
-	var code = new_code(); //some random string or random number for a code?
-	res.status(200);
-	res.send(code);
-});
-
-app.get('/allcodes', function(req, res) {
-	var list = "";
-	for (x in code_array) {
-		list += code_array[x] + " ";
-	}
-	res.status(200);
-	res.send(list);
+	// var code = new_code(); //some random string or random number for a code?
+	var codes = db.collection('codes');
+	var code = new_code()
+	codes.find({'code': code}).toArray(function(err, arr) {
+		if (!err) {
+			if (arr[0] != null) {
+				res.status(200);
+				res.send("An error occurred, please try again.");
+			}
+			else {
+				var to_insert = {
+				"code": code,
+				"queue": [],
+				"last_added": new Date()
+				}
+				codes.insertOne(to_insert);
+				console.log(to_insert);
+				res.status(200);
+				res.send(code);
+			}
+		}
+	});
 });
 
 app.get('/validcode', function(req, res) {
 	var code = req.query.code;
+	var codes = db.collection('codes');
 
-	var valid = validcode(code);
-
-	res.status(200);
-	if (valid) {
-		res.send('is valid');
-	}
-	else {
-		res.send('not valid');
-	}
+	codes.find({"code": code}).toArray(function(err, arr) {
+		if (!err) {
+			res.status(200);
+			if (arr[0] == null) {
+				res.send('not valid');
+			}
+			else {
+				res.send('is valid');
+			}
+		}
+		else {
+			res.status(500);
+			res.send('Oops! Something went wrong');
+		}
+	});
 });
 
 app.get('/queue', function(req, res) {
+	//HAVE TO DEAL WITH SPOTIFY AUTHENTICATION
 	var code = req.query.code;
+	var codes = db.collection('codes');
 
-	var valid = validcode(code);
-
-	//check to see if the code is in code_array/database (?)
-
-	//if it's not found return some sort of error message, tell user to generate a new code
-
-	//if it is found...
-
-	// var fileText = "";
-	var options = {
-		root: __dirname,
-		dotfiles: 'deny'
-	};
-	// fileText += '<html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Login Page</title><!-- CSS --><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500"><link rel="stylesheet" href="bootstrap/login/assets/bootstrap/css/bootstrap.min.css"><link rel="stylesheet" href="bootstrap/login/assets/font-awesome/css/font-awesome.min.css"><link rel="stylesheet" href="bootstrap/login/assets/css/form-elements.css"><link rel="stylesheet" href="bootstrap/login/assets/css/style.css"><link rel="stylesheet" href="custom-style.css"><!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries --><!-- WARNING: Respond.js doesnt work if you view the page via file:// --><!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]--><!-- Favicon and touch icons --><link rel="shortcut icon" href="bootstrap/login/assets/ico/favicon.png"><link rel="apple-touch-icon-precomposed" sizes="144x144" href="bootstrap/login/assets/ico/apple-touch-icon-144-precomposed.png"><link rel="apple-touch-icon-precomposed" sizes="114x114" href="bootstrap/login/assets/ico/apple-touch-icon-114-precomposed.png"><link rel="apple-touch-icon-precomposed" sizes="72x72" href="bootstrap/login/assets/ico/apple-touch-icon-72-precomposed.png"><link rel="apple-touch-icon-precomposed" href="bootstrap/login/assets/ico/apple-touch-icon-57-precomposed.png"></head><body><div class="logo">JukeBox</div><div class="inner-bg"><div class="container"><div class="col-sm-3 col-md-5 pull-right"><form class="navbar-form" role="search"><div class="input-group"><input type="text" class="form-control" placeholder="Find a Song" name="addtoqueue"><div class="input-group-btn"><button class="btn" type="submit"><i class="glyphicon glyphicon-search"></i></button></div></div></form></div><!-- Javascript --><script src="bootstrap/login/assets/js/jquery-2.1.4.min.js"></script><script src="bootstrap/login/assets/bootstrap/js/bootstrap.min.js"></script><script src="bootstrap/login/assets/js/jquery.backstretch.min.js"></script><script src="bootstrap/login/assets/js/scripts.js"></script><script src="jukebox.js"></script><!--[if lt IE 10]><script src="assets/js/placeholder.js"></script><![endif]--></body></html>';
-	res.status(200);
-	res.sendFile('/public/queue.html', options);
-
+	codes.find({"code": code}).toArray(function(err, arr) {
+		if (!err) {
+			var options = {
+				root: __dirname,
+				dotfiles: 'deny'
+			};
+			res.status(200);
+			if (arr[0] == null) {
+				res.sendFile('/public/index.html', options);
+			}
+			else {
+				res.sendFile('/public/queue.html', options);
+			}
+		}
+		else {
+			res.status(500);
+			res.send('Oops! Something went wrong');
+		}
+	});
 });
 
 app.get('/userqueue', function(req, res) {
 	var code = req.query.code;
+	var codes = db.collection('codes');
 
-	var valid = validcode(code);
-
-	//check to see if the code is in code_array/database (?)
-
-	//if it's not found return some sort of error message, tell user to generate a new code
-
-	//if it is found...
-
-	// var fileText = "";
-	var options = {
-		root: __dirname,
-		dotfiles: 'deny'
-	};
-	// fileText += '<html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Login Page</title><!-- CSS --><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500"><link rel="stylesheet" href="bootstrap/login/assets/bootstrap/css/bootstrap.min.css"><link rel="stylesheet" href="bootstrap/login/assets/font-awesome/css/font-awesome.min.css"><link rel="stylesheet" href="bootstrap/login/assets/css/form-elements.css"><link rel="stylesheet" href="bootstrap/login/assets/css/style.css"><link rel="stylesheet" href="custom-style.css"><!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries --><!-- WARNING: Respond.js doesnt work if you view the page via file:// --><!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]--><!-- Favicon and touch icons --><link rel="shortcut icon" href="bootstrap/login/assets/ico/favicon.png"><link rel="apple-touch-icon-precomposed" sizes="144x144" href="bootstrap/login/assets/ico/apple-touch-icon-144-precomposed.png"><link rel="apple-touch-icon-precomposed" sizes="114x114" href="bootstrap/login/assets/ico/apple-touch-icon-114-precomposed.png"><link rel="apple-touch-icon-precomposed" sizes="72x72" href="bootstrap/login/assets/ico/apple-touch-icon-72-precomposed.png"><link rel="apple-touch-icon-precomposed" href="bootstrap/login/assets/ico/apple-touch-icon-57-precomposed.png"></head><body><div class="logo">JukeBox</div><div class="inner-bg"><div class="container"><div class="col-sm-3 col-md-5 pull-right"><form class="navbar-form" role="search"><div class="input-group"><input type="text" class="form-control" placeholder="Find a Song" name="addtoqueue"><div class="input-group-btn"><button class="btn" type="submit"><i class="glyphicon glyphicon-search"></i></button></div></div></form></div><!-- Javascript --><script src="bootstrap/login/assets/js/jquery-2.1.4.min.js"></script><script src="bootstrap/login/assets/bootstrap/js/bootstrap.min.js"></script><script src="bootstrap/login/assets/js/jquery.backstretch.min.js"></script><script src="bootstrap/login/assets/js/scripts.js"></script><script src="jukebox.js"></script><!--[if lt IE 10]><script src="assets/js/placeholder.js"></script><![endif]--></body></html>';
-	res.status(200);
-	res.sendFile('/public/userqueue.html', options);
-
+	codes.find({"code": code}).toArray(function(err, arr) {
+		if (!err) {
+			var options = {
+				root: __dirname,
+				dotfiles: 'deny'
+			};
+			res.status(200);
+			if (arr[0] == null) {
+				res.sendFile('/public/index.html', options);
+			}
+			else {
+				res.sendFile('/public/userqueue.html', options);
+			}
+		}
+		else {
+			res.status(500);
+			res.send('Oops! Something went wrong');
+		}
+	});
 });
 
-app.get('/lookupsong', function(req, res) {
+app.get('/addsong', function(req, res) {
 	var songid = req.query.id;
+	var code = req.query.code.
+	codes = db.collection('codes');
 	request.get('https://api.spotify.com/v1/tracks/' + songid, function(err, response, body) {
     	if (!err && response.statusCode == 200) {
     		data = JSON.parse(response.body);
@@ -142,10 +165,11 @@ app.get('/lookupsong', function(req, res) {
 	    	var queuealbum = data['album']['name'];
 	    	var queueart = data['album']['images'];
 	    	var queueobj = {"title": queuetitle, "artist": queueartist, "album": queuealbum, "art": queueart, "id": queueid, "uri": queueuri, };
+
 		    res.status(200);
 		    res.send(queueobj);
     	}
-		else {
+		else if (err) {
 			res.status(400);
 			res.send("An error occurred, please try again");
 		}
@@ -157,7 +181,6 @@ app.get('/searchsong', function(req, res) {
 	if (song != "") {
 		spotify.search({ type: 'track', query: song }, function(err, data) {
 			if (!err) {
-				var text = "";
 				var queuesongs = [];
 			    for (x in data['tracks']['items']) {
 			    	var queueid = data['tracks']['items'][x]['id'];
@@ -168,14 +191,9 @@ app.get('/searchsong', function(req, res) {
 			    	var queueart = data['tracks']['items'][x]['images'];
 			    	var queueobj = {"title": queuetitle, "artist": queueartist, "album": queuealbum, "art": queueart, "id": queueid, "uri": queueuri};
 			    	queuesongs.push(queueobj);
-			    	text += data['tracks']['items'][x]['name'] + " – " + data['tracks']['items'][x]['artists'][0]['name'] + "<br>"; 
-			    	// console.log(data['tracks']['items'][x]['name']);
-			    	// console.log(data['tracks']['items'][x]['album']['name']);
-			    	// console.log(data['tracks']['items'][x]['artists'][0]['name']);
-			    	// i++;
 			    }
-			    //console.log(queuesongs);
 			    res.status(200);
+			    console.log("hey");
 			    res.send(queuesongs);
 			}
 			else {

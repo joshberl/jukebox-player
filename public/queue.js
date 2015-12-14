@@ -56,7 +56,7 @@ function scroll(ele){
 var addtoqueue = function(id) {
 	var queue = document.getElementById('queue');
 	var empty_queue = document.getElementById('empty_queue');
-	$.get('/lookupsong?id=' + id, function(data, status) {
+	$.get('/lookupid?id=' + id, function(data, status) {
 		if (empty_queue != null) {
 				queue.style.backgroundcolor = "none";
 				queue.innerHTML = "<div class=queue_elem style='background-image: url(" + data.art[0].url + ")';><span class='queue_elem_text'>" + data.title + " – " + data.artist + " - " + data.album + "</span></div>";
