@@ -28,9 +28,9 @@ $( document ).ready(function() {
 			for (var i = data.queue.length - 1; i >= 0; i--) {
 				queue.innerHTML += "<div class=queue_elem style='background-image: url(" + data.queue[i].art[0].url + ")';><span class='queue_elem_text'>" + data['queue'][i]['title'] + " – " + data['queue'][i]['artist'] + " - " + data['queue'][i]['album'] + "</span></div>";
 			}
+			load_player(data);
 		}
 	})
-
 });
 
 
@@ -97,7 +97,13 @@ var addtoqueue = function(id) {
 	});
 };
 
-
+var load_player = function(data) {
+	var player = document.getElementById('player');
+	console.log(data.queue[0].uri);
+	player.innerHTML = "";
+	player.innerHTML += "<iframe src=\"https://embed.spotify.com/?uri=spotify:track:1ZozJfi8u9cO2Ob8KwiwNT\" width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\"></iframe>";
+	//player.innerHTML += "<iframe src=\"https://embed.spotify.com/?uri=\"" + data.queue[0].uri + " width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\"></iframe>";
+}
 
 // var searchsong = function(req, res) {
 // 	var song = req.query.song;
