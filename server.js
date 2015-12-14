@@ -12,6 +12,7 @@ var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb:/
 var MongoClient = require('mongodb').MongoClient, format = require('util').format;
 var db = MongoClient.connect(mongoUri, function(error, databaseConnection) {
     db = databaseConnection;
+    db.collection('codes').createIndex({'last_added': 1}, {expireAfterSeconds: 14400}); //expire codes after 4 hours since a song was added
     //db.collection('codes').remove({});
 });
 
