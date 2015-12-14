@@ -3,6 +3,23 @@ $('input').change(function() {
 	$('input').val('');
 });
 
+console.log(window.location['search']);
+var search = window.location['search'];
+var code = "";
+for (var i = 0; i < window.location['search'].length; i++) {
+	if (search[i+9] == undefined) {
+		window.location.assign('/../');
+		break;
+	}
+	if (search[i] == 'c' && search[i+1] == 'o' && search[i+2] == 'd' && search[i+3] == 'e') {
+		for (var j = 0; j < 5; j++) {
+			code += search[i+j+5];
+		}
+		document.getElementById('queueid').innerHTML = "The code for this queue is: <a><span id='code'>" + code + "</span></a>";
+		break;
+	}
+}
+
 var submit_search = function() {
 	var song_search = document.getElementById('song_search');
 	var search_item = document.getElementsByName('searchbar')[0].value;
@@ -40,7 +57,7 @@ var display_song_data = function(song) {
 var addtoqueue = function(id) {
 	var queue = document.getElementById('queue');
 	var empty_queue = document.getElementById('empty_queue');
-	$.get('/lookupsong?id=' + id, function(data, status) {
+	$.get('/addsong?id=' + id + '&code=' + document.getElementById('code').innerHTML, function(data, status) {
 		if (empty_queue != null) {
 				queue.style.backgroundcolor = "none";
 				queue.innerHTML = "<div class=queue_elem style='background-image: url(" + data.art[0].url + ")';><span class='queue_elem_text'>" + data.title + " – " + data.artist + " - " + data.album + "</span></div>";

@@ -10,8 +10,11 @@
     "body-parser": "^1.14.1",
     "ejs": "^2.3.1",
     "express": "~4.9.x",
+    "kerberos": "0.0.17",
+    "mongodb": "^2.1.1",
     "request": "^2.67.0",
     "spotify": "^0.3.0",
+    "util": "^0.10.3",
     "validator": "^4.2.1"
   },
   "engines": {

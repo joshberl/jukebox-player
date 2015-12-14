@@ -47,6 +47,13 @@
 	color: white;
 }
 
+#queueid {
+	font-size: 16pt;
+	text-align: center;
+	margin-top: 20px;
+	color: black;
+}
+
 .song_search {
 	max-width: inherit;
 }
@@ -72,9 +79,12 @@
 }
 
 #empty_queue_text {
+	display: inline-block;
+	line-height: normal;
 	position: relative;
 	vertical-align: middle;
-	top: 30%;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 .queue_elem {
@@ -88,6 +98,7 @@
 
 .queue_elem_text {
 	display: inline-block;
+	color: #71fa7b;
 	text-align: left;
 	line-height: normal;
 	position: absolute;
