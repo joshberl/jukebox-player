@@ -100,12 +100,8 @@ var addtoqueue = function(id) {
 
 var load_player = function(data) {
 	var player = document.getElementById('player');
-	console.log(data.queue[0].uri);
 	player.innerHTML = "";
-	//player.innerHTML += "<iframe src=\"https://embed.spotify.com/?uri=spotify:track:1ZozJfi8u9cO2Ob8KwiwNT\" width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\"></iframe>";
 	var iframe = "<iframe src=\"https://embed.spotify.com/?uri=" + data.queue[0].uri + "\" frameborder=\"0\" allowtransparency=\"true\"></iframe>";
-	//player.innerHTML = "<iframe src=\"https://embed.spotify.com/?uri=spotify:track:0VLOR0uGnxPrqmdTFWc96K\" width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\"></iframe>"
-	console.log(iframe);
 	player.innerHTML += iframe;
 }
 
