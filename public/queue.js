@@ -88,15 +88,11 @@ function scroll(ele){
 var addtoqueue = function(id) {
 	var queue = document.getElementById('queue');
 	var empty_queue = document.getElementById('empty_queue');
-	$.get('/lookupid?id=' + id, function(data, status) {
-		if (empty_queue != null) {
-				queue.style.backgroundcolor = "none";
-				queue.innerHTML = "<div class=queue_elem style='background-image: url(" + data.art[0].url + ")';><span class='queue_elem_text'>" + data.title + " – " + data.artist + " - " + data.album + "</span></div>";
-				console.log(queue.innerHTML);
-		}
-		else {
-			console.log(data);
-			queue.innerHTML += "<div class=queue_elem style='background-image: url(" + data.art[0].url + ")';><span class='queue_elem_text'>" + data.title + " – " + data.artist + " - " + data.album + "</span></div>";
+	$.get('/addsong?id=' + id + '&code=' + document.getElementById('code').innerHTML, function(data, status) {
+		console.log(data.queue[0]);
+		queue.innerHTML = "";
+		for (var i = data.queue.length - 1; i >= 0; i--) {
+			queue.innerHTML += "<div class=queue_elem style='background-image: url(" + data.queue[i].art[0].url + ")';><span class='queue_elem_text'>" + data['queue'][i]['title'] + " – " + data['queue'][i]['artist'] + " - " + data['queue'][i]['album'] + "</span></div>";
 		}
 	});
 };
