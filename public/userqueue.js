@@ -38,21 +38,18 @@ var display_song_data = function(song) {
 };
 
 var addtoqueue = function(id) {
-	console.log(id);
 	var queue = document.getElementById('queue');
 	var empty_queue = document.getElementById('empty_queue');
 	$.get('/lookupsong?id=' + id, function(data, status) {
 		if (empty_queue != null) {
-			if (empty_queue.innerHTML == 'Queue currently empty. Search a song to add to the queue.') {
 				queue.style.backgroundcolor = "none";
-				queue.innerHTML = "<div class=queue_elem style='background-image: url(" + data.art[0].url + ")';>" + data.title + " – " + data.artist + " - " + data.album + "</div>";
-			}
+				queue.innerHTML = "<div class=queue_elem style='background-image: url(" + data.art[0].url + ")';><span class='queue_elem_text'>" + data.title + " – " + data.artist + " - " + data.album + "</span></div>";
+				console.log(queue.innerHTML);
 		}
 		else {
 			console.log(data);
-			queue.innerHTML += "<div class=queue_elem style='background-image: url(" + data.art[0].url + ")';>" + data.title + " – " + data.artist + " - " + data.album + "</div>";
+			queue.innerHTML += "<div class=queue_elem style='background-image: url(" + data.art[0].url + ")';><span class='queue_elem_text'>" + data.title + " – " + data.artist + " - " + data.album + "</span></div>";
 		}
-		console.log(data.art[0].url);
 	});
 };
 
