@@ -33,6 +33,7 @@ $( document ).ready(function() {
 	})
 
 });
+
 var intervalID;
 $(".queue_elem_text").hover(function(){
     var $this = $(this);
