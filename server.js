@@ -13,6 +13,7 @@ var MongoClient = require('mongodb').MongoClient, format = require('util').forma
 var db = MongoClient.connect(mongoUri, function(error, databaseConnection) {
     db = databaseConnection;
     db.collection('codes').createIndex({'last_added': 1}, {expireAfterSeconds: 14400}); //expire codes after 4 hours since a song was added
+    db.collection('locations').createIndex({'last_added': 1}, {expireAfterSeconds: 604800});
     //db.collection('codes').remove({});
 });
 
@@ -58,6 +59,43 @@ app.get('/', function(req, res) {
 	res.status(200);
 	res.sendFile('index.html', options);
 
+});
+
+app.get('/locations', function(req, res) {
+	var options = {
+		root: __dirname,
+		dotfiles: 'deny'
+	};
+	res.status(200);
+	res.sendFile('locations.html', options);
+});
+
+app.post('/addlocation', function(req, res) {
+	var lat = Number(req.body.lat);
+	var lng = Number(req.body.lng);
+
+	if (lat <= 90 && lat >= -90 && lng <= 180 && lng >= -180) {
+		var newloc = {
+			"lat": lat,
+			"lng": lng
+		};
+		var location = db.collection('locations');
+		locations.insertOne(newloc);
+		locations.find({}).toArray(function(err, arr) {
+			if (!err) {
+				res.status(200);
+				res.send(arr);
+			}
+			else {
+				res.status(500);
+				res.send("Oops! Something went wrong.");
+			}
+		});
+	}
+	else {
+		res.status(400);
+		res.send("Lat and Lng were not valid.");
+	}
 });
 
 app.get('/newcode', function(req, res) {
