@@ -64,7 +64,7 @@ var display_song_data = function(song) {
 		//console.log(song.title);
 		var text = "";
 		text += (song.title) + " – " + (song.artist) + " - " + (song.album) + "<br>";
-		var button = "<button class='btn pull-left' onclick=addtoqueue('" + song.id+"')>" + text + "</button>";
+		var button = "<button class='btn pull-left' onclick=addtoqueue('" + song.id+"')> <span class='scrollthis'>" + text + "</span>  + </button>";
 		console.log(button);
 		return button;
 	}
