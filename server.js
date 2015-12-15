@@ -79,7 +79,7 @@ app.post('/addlocation', function(req, res) {
 			"lat": lat,
 			"lng": lng
 		};
-		var location = db.collection('locations');
+		var locations = db.collection('locations');
 		locations.insertOne(newloc);
 		locations.find({}).toArray(function(err, arr) {
 			if (!err) {

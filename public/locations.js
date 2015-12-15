@@ -46,7 +46,7 @@ function renderMap() {
 }
 
 function post(lat, lng) {
-	var url = "https://jukebox-player.herokuapp.com/addlocation";
+	var url = "/addlocation";
 	var params = "lat=" + lat + "&lng=" + lng;
 	request.open("POST", url, true);
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
