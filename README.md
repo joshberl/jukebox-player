@@ -24,6 +24,9 @@ Notes on implementation ideas:
 (4) MongoDB/Server-side persistence - Saves the queue of songs
 (5) Local storage saves the code on the homepage after it is generated
 
+Future ideas to implement:
+In the future we look to introduce an upvoting/downvoting button to strongly prioritize what songs are preferred over others. We could also display a subsection of the top 3 songs in the queue that could be titled "Songs to be played next: ". We could even link a database of lyrics to each song so the people using the app could sing along. 
+
 
 
 
