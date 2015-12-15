@@ -118,7 +118,6 @@
     left: 5%;
     right: 30%;
     transform: translateY(-50%);
-	text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;  
 }
 
 .ellipsis {
