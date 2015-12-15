@@ -34,20 +34,30 @@ $( document ).ready(function() {
 
 });
 
-var intervalID;
-$(".queue_elem_text").hover(function(){
-    var $this = $(this);
-    intervalID = setInterval(function() {
-       scroll($this);
-    }, 100);
-}, function() {
-    clearInterval(intervalID);
+$(function(){
+var scroll_text;
+$('queue_elem style').hover(
+    function () {
+        var $elmt = $(this);
+        scroll_text = setInterval(function(){scrollText($elmt);}, 5);
+    },
+    function () {
+        clearInterval(scroll_text);
+        $(this).find('queue_elem_text').css({
+            left: 0
+        });
+    }
+);
+    
+    var scrollText = function($elmt){
+        var left = $elmt.find('queue_elem_text').position().left - 1;
+        left = -left > $elmt.find('queue_elem_text').width() ? $elmt.find('queue_elem_text').width() : left;
+        $elmt.find('queue_elem_text').css({
+            left: left
+        });
+    };
+    
 });
-
-function scroll(ele){
-    var s = ele.text().substr(1)+ele.text().substr(0,1);
-    ele.text(s);
-}
 
 
 
