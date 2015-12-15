@@ -16,6 +16,8 @@ $( document ).ready(function() {
 			for (var j = 0; j < 5; j++) {
 				code += search[i+j+5];
 			}
+			console.log(code);
+			console.log(localstorage['code']);
 			if (localstorage['code'] != code) {
 				window.location.assign('/../');
 			}
