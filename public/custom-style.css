@@ -24,7 +24,7 @@
 	padding-top: 150px;
 	color: white;
 	font-weight: bold;
-	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;  
 }
 
 .information {
@@ -33,7 +33,7 @@
 	padding-top: 80px;
 	color: white;
 	font-weight: bold;
-	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;  
 }
 
 .logo {
@@ -52,7 +52,7 @@
 	text-align: center;
 	margin-top: 20px;
 	color: white;
-	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;  
 }
 
 .song_search {
@@ -107,20 +107,7 @@
 	text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;  
 }
 
-.inherit_width {
-	width: inherit;
-}
-
 .ellipsis
 {
     text-overflow: ellipsis;
 }
-
-.btn-add-song
-{
-	max-width: 100%
-=======
-	text-align: left;
->>>>>>> c37008e305bd4d5289b216bb500d327f2437d3a6
-}
->>>>>>> 78b5535bb8c3a96614b4c13ff8abf8fa50dfd93c
