@@ -58,6 +58,7 @@ var parse_songs = function(songlist) {
 	return buttons;
 };
 
+// adds song text to the button
 var display_song_data = function(song) {
 	//console.log(song);
 	if (song) {
