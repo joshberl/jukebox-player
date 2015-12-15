@@ -67,7 +67,7 @@ app.get('/locations', function(req, res) {
 		dotfiles: 'deny'
 	};
 	res.status(200);
-	res.sendFile('locations.html', options);
+	res.sendFile('public/locations.html', options);
 });
 
 app.post('/addlocation', function(req, res) {
