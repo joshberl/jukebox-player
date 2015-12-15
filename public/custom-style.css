@@ -33,6 +33,7 @@
 	padding-top: 80px;
 	color: white;
 	font-weight: bold;
+	font-size: 18pt;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
@@ -119,8 +120,5 @@
 .btn-add-song
 {
 	max-width: 100%
-=======
 	text-align: left;
->>>>>>> c37008e305bd4d5289b216bb500d327f2437d3a6
-}
->>>>>>> 78b5535bb8c3a96614b4c13ff8abf8fa50dfd93c
+
