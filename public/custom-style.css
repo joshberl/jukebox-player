@@ -126,3 +126,8 @@
 .ellipsis {
     text-overflow: ellipsis;
 }
+
+#map_canvas {
+	width: 100%;
+	height: 50%;
+}
