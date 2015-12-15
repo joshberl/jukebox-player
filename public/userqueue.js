@@ -34,31 +34,6 @@ $( document ).ready(function() {
 
 });
 
-$(function(){
-var scroll_text;
-$('queue_elem style').hover(
-    function () {
-        var $elmt = $(this);
-        scroll_text = setInterval(function(){scrollText($elmt);}, 5);
-    },
-    function () {
-        clearInterval(scroll_text);
-        $(this).find('queue_elem_text').css({
-            left: 0
-        });
-    }
-);
-    
-    var scrollText = function($elmt){
-        var left = $elmt.find('queue_elem_text').position().left - 1;
-        left = -left > $elmt.find('queue_elem_text').width() ? $elmt.find('queue_elem_text').width() : left;
-        $elmt.find('queue_elem_text').css({
-            left: left
-        });
-    };
-    
-});
-
 
 
 var submit_search = function() {
