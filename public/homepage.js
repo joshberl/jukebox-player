@@ -30,7 +30,7 @@ $('input').change(function() {
 	var code = $to_send[0]['value'];
 	$.get('../validcode?code=' + code, function(data, status) {
 		if (data == 'is valid') {
-			window.location.assign('../queue?code=' + code);
+			window.location.assign('../userqueue?code=' + code);
 		}
 		else {
 			queue_attempt.innerHTML = "Not a valid code. Either enter a valid code or create your own";

@@ -59,12 +59,9 @@
 	max-width: inherit;
 }
 
-.song-search {
-	position: fixed;
-	padding-left: 60px;
-	padding-top: 20px;
+.song_search {
+	width: inherit;
 	align: left;
-	color: blue;
 }
 
 #queue {

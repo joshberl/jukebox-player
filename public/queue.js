@@ -16,6 +16,9 @@ $( document ).ready(function() {
 			for (var j = 0; j < 5; j++) {
 				code += search[i+j+5];
 			}
+			if (localstorage['code'] != code) {
+				window.location.assign('/../');
+			}
 			document.getElementById('queueid').innerHTML = "The code for this queue is: <a><span id='code'>" + code + "</span></a>";
 			break;
 		}
@@ -64,7 +67,7 @@ var display_song_data = function(song) {
 		//console.log(song.title);
 		var text = "";
 		text += (song.title) + " – " + (song.artist) + " - " + (song.album) + "<br>";
-		var button = "<button class='btn pull-left' onclick=addtoqueue('" + song.id+"')>" + text + "</button>";
+		var button = "<button class='btn pull-left' onclick=addtoqueue('" + song.id+"')><span class=scrollthis>" + text + "</span></button>";
 		console.log(button);
 		return button;
 	}
