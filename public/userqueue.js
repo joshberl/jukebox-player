@@ -33,6 +33,20 @@ $( document ).ready(function() {
 	})
 
 });
+var intervalID;
+$(".queue_elem_text").hover(function(){
+    var $this = $(this);
+    intervalID = setInterval(function() {
+       scroll($this);
+    }, 100);
+}, function() {
+    clearInterval(intervalID);
+});
+
+function scroll(ele){
+    var s = ele.text().substr(1)+ele.text().substr(0,1);
+    ele.text(s);
+}
 
 
 
@@ -57,6 +71,7 @@ var parse_songs = function(songlist) {
 	return buttons;
 };
 
+// adds song text to the button
 var display_song_data = function(song) {
 	if (song) {
 		var text = "";
