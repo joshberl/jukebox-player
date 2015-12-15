@@ -38,10 +38,6 @@ function renderMap() {
 		title: "You are here!"
 	});
 	marker.setMap(map);
-	google.maps.event.addListener(marker, 'click', function() {
-		infowindow.setContent(marker.title);
-		infowindow.open(map, marker);
-	});
 	post(mylat, mylong);
 }
 
@@ -69,10 +65,4 @@ function new_marker(data) {
 		position: pos,
 		map: map
 	});
-	infowindow = new google.maps.InfoWindow();
-	google.maps.event.addListener(marker, 'click', function() {
-		infowindow.setContent(this.content);
-		infowindow.open(map, this);
-	});
-
 }
