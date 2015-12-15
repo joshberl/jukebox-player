@@ -103,12 +103,14 @@
 }
 
 .queue_elem {
+	background-color: rgba(0, 0, 0, 0.7);
 	position: relative;
 	background-position: center;
 	width: auto;
 	border-radius: 5px;
 	margin-bottom: 20px;
 	height: 70px;
+
 }
 
 .queue_elem_text {
