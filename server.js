@@ -33,22 +33,9 @@ var new_code = function() {
 };
 
 //insertion sort because yay sorting as we insert things
-var sort = function(array, new_song) {
-	var position = 0;
-	if (array.length == 0) {
-		array.push(new_song);
-		return array;
-	}
-	while (position < array.length) {
-		if (new_song.count <= array[position].count) {
-			array.push(array[array.length-1]);
-			for (var i = array.length - 2; i > position; i--) {
-				array[i] = array[i-1];
-			}
-			array[position] = new_song;
-			return array;
-		}
-	}
+var addnewsong = function(array, new_song) {
+	array.push(new_song);
+	return array;
 }
 
 app.get('/', function(req, res) {
@@ -232,7 +219,7 @@ app.get('/addsong', function(req, res) {
 	    		if (!err) {
 	    			if (arr[0] != null) {
 	    				var array = arr[0].queue;
-	    				array = sort(array, queueobj);
+	    				array = addnewsong(array, queueobj);
 	    				var new_data = {
 	    					'code': code,
 	    					'queue': array,
@@ -288,6 +275,38 @@ app.get('/searchsong', function(req, res) {
 		res.send("Please enter something to search");
 	}
 });
+
+app.get('/skipsong', function(req, res) {
+	var code = req.query.code;
+
+	var codes = db.collection('codes');
+	codes.find({'code': code}).toArray(function(err, arr) {
+		if (!err) {
+			var queue = arr[0]['queue'];
+			queue.shift();
+			var updated = {
+				'code': code,
+				'queue': queue,
+				'last_added': arr[0]['last_added']
+			};
+			codes.update({'code':code}, {$set: updated}, {upsert: true});
+			codes.find({'code': code}).toArray(function(err, arr) {
+	    		if (!err) {
+					res.status(200);
+					res.send(arr[0]);
+	    		}
+	    		else {
+	    			res.status(500);
+	    			res.send('Oops! Something went wrong!');
+	    		}
+	    	});
+		}
+		else {
+			res.status(500);
+			res.send('Oops! Something went wrong!');
+		}
+	});
+})
 
 app.listen(app.get('port'), function() {
   	console.log('Jukebox is running on port', app.get('port'));

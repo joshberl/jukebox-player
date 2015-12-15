@@ -22,11 +22,10 @@ $( document ).ready(function() {
 	}
 
 	$.get('/currentqueue?code=' + document.getElementById('code').innerHTML, function(data, status) {
-		console.log(data);
 		if (data.queue[0] != null) {
 			var queue = document.getElementById('queue');
 			queue.innerHTML = "";
-			for (var i = data.queue.length - 1; i >= 0; i--) {
+			for (var i = 0; i < data.queue.length; i++) {
 				queue.innerHTML += "<div class=queue_elem style='background-image: url(" + data.queue[i].art[0].url + ")';><span class='queue_elem_text'>" + data['queue'][i]['title'] + " – " + data['queue'][i]['artist'] + " - " + data['queue'][i]['album'] + "</span></div>";
 			}
 		}
@@ -63,7 +62,6 @@ var display_song_data = function(song) {
 		var text = "";
 		text += (song.title) + " – " + (song.artist) + " - " + (song.album) + "<br>";
 		var button = "<button class='btn pull-left' onclick=addtoqueue('" + song.id + "')>" + text + "</button>";
-		console.log(button);
 		return button;
 	}
 };
@@ -72,9 +70,8 @@ var addtoqueue = function(id) {
 	var queue = document.getElementById('queue');
 	var empty_queue = document.getElementById('empty_queue');
 	$.get('/addsong?id=' + id + '&code=' + document.getElementById('code').innerHTML, function(data, status) {
-		console.log(data.queue[0]);
 		queue.innerHTML = "";
-		for (var i = data.queue.length - 1; i >= 0; i--) {
+		for (var i = 0; i < data.queue.length; i++) {
 			queue.innerHTML += "<div class=queue_elem style='background-image: url(" + data.queue[i].art[0].url + ")';><span class='queue_elem_text'>" + data['queue'][i]['title'] + " – " + data['queue'][i]['artist'] + " - " + data['queue'][i]['album'] + "</span></div>";
 		}
 	});
