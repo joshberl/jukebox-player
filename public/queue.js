@@ -17,8 +17,8 @@ $( document ).ready(function() {
 				code += search[i+j+5];
 			}
 			console.log(code);
-			console.log(localstorage['code']);
-			if (localstorage['code'] != code) {
+			console.log(localStorage['code']);
+			if (localStorage['code'] != code) {
 				window.location.assign('/../');
 			}
 			document.getElementById('queueid').innerHTML = "The code for this queue is: <a><span id='code'>" + code + "</span></a>";
