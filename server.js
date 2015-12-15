@@ -13,8 +13,8 @@ var MongoClient = require('mongodb').MongoClient, format = require('util').forma
 var db = MongoClient.connect(mongoUri, function(error, databaseConnection) {
     db = databaseConnection;
     db.collection('codes').createIndex({'last_added': 1}, {expireAfterSeconds: 14400}); //expire codes after 4 hours since a song was added
-    db.collection('locations').createIndex({'last_added': 1}, {expireAfterSeconds: 604800});
-    //db.collection('codes').remove({});
+    db.collection('locations').createIndex({'created_at': 1}, {expireAfterSeconds: 604800});
+    //db.collection('locations').remove({});
 });
 
 app.set('port', (process.env.PORT || 5000));
@@ -77,7 +77,8 @@ app.post('/addlocation', function(req, res) {
 	if (lat <= 90 && lat >= -90 && lng <= 180 && lng >= -180) {
 		var newloc = {
 			"lat": lat,
-			"lng": lng
+			"lng": lng,
+			"created_at": new Date()
 		};
 		var locations = db.collection('locations');
 		locations.insertOne(newloc);
