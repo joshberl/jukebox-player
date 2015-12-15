@@ -50,7 +50,6 @@ var submit_search = function() {
 };
 
 var parse_songs = function(songlist) {
-	//console.log(songlist);
 	var buttons = ""
 	for (var i = 0; i < songlist.length; i++) {
 		buttons += display_song_data(songlist[i]);
@@ -59,9 +58,7 @@ var parse_songs = function(songlist) {
 };
 
 var display_song_data = function(song) {
-	//console.log(song);
 	if (song) {
-		//console.log(song.title);
 		var text = "";
 		text += (song.title) + " – " + (song.artist) + " - " + (song.album) + "<br>";
 		var button = "<button class='btn pull-left' onclick=addtoqueue('" + song.id + "')>" + text + "</button>";
