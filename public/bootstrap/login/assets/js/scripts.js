@@ -25,7 +25,7 @@ jQuery(document).ready(function() {
     	$.backstretch("bootstrap/login/assets/img/backgrounds/Homepage_bg.jpg");
     }
     else {
-    	document.body.style.backgroundImage = url('/../img/backgrounds/Homepage_bg.jpg');
+    	document.body.style.backgroundImage = "url('/../img/backgrounds/Homepage_bg.jpg')";
     }
 
 });
