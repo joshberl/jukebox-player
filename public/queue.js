@@ -30,6 +30,8 @@ $( document ).ready(function() {
 		if (data.queue[0] != null) {
 			var queue = document.getElementById('queue');
 			queue.innerHTML = "";
+			var skipper = document.getElementById('skipper');
+			skipper.innerHTML = '<button class="skipbtn" onclick=skip_song()>Skip to Next Song</button>';
 			for (var i = 1; i < data.queue.length; i++) {
 				queue.innerHTML += "<div class=queue_elem style='background-image: url(" + data.queue[i].art[0].url + ")';><span class='queue_elem_text'>" + data['queue'][i]['title'] + " – " + data['queue'][i]['artist'] + " - " + data['queue'][i]['album'] + "</span></div>";
 			}
@@ -49,10 +51,10 @@ $( document ).ready(function() {
 		$.get('/currentqueue?code=' + document.getElementById('code').innerHTML, function(data, status) {
 			if (data.queue[0] != null) {
 				var queue = document.getElementById('queue');
+				var skipper = document.getElementById('skipper');
+				skipper.innerHTML = '<button class="skipbtn" onclick=skip_song()>Skip to Next Song</button>';
 				if (data.queue.length == 1) {
 					queue.innerHTML = "";
-					var skipper = document.getElementById('skipper');
-					skipper.innerHTML = '<button class="skipbtn" onclick=skip_song()>Skip to Next Song</button>';
 					if (!player_exists) {
 						load_player(data);
 						player_exists = true;
