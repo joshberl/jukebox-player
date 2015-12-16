@@ -47,7 +47,14 @@ $( document ).ready(function() {
 			}
 		});
 	}, 30000);
-
+	
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function (position) {
+			var userlat = position.coords.latitude;
+			var userlng = position.coords.longitude;
+			$.post('/addlocation', {lat: userlat, lng: userlng});
+		});
+	}
 });
 
 
