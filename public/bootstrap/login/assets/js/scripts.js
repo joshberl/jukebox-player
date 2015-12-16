@@ -8,7 +8,7 @@ jQuery(document).ready(function() {
     	document.body.style.backgroundRepeat = "repeat-y";
     	var skipper = document.getElementById('skipper');
     	if (skipper != null) {
-    		skipper.style.paddingTop = 60px;
+    		skipper.style.paddingTop = '60px';
     	}
     }
 
