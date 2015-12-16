@@ -103,7 +103,6 @@ app.get('/newcode', function(req, res) {
 				"last_added": new Date()
 				}
 				codes.insertOne(to_insert);
-				console.log(to_insert);
 				res.status(200);
 				res.send(code);
 			}
@@ -215,7 +214,6 @@ app.get('/addsong', function(req, res) {
 	    	var queueobj = {"title": queuetitle, "artist": queueartist, "album": queuealbum, "art": queueart, "id": queueid, "uri": queueuri, "count": 1};
 
 	    	codes.find({'code': code}).toArray(function(err, arr) {
-	    		console.log(code);
 	    		if (!err) {
 	    			if (arr[0] != null) {
 	    				var array = arr[0].queue;
@@ -228,7 +226,6 @@ app.get('/addsong', function(req, res) {
 	    				codes.update({'code':code}, {$set: new_data}, {upsert: true});
 	    				codes.find({'code': code}).toArray(function(err, arr) {
 	    					if (!err) {
-	    						console.log(arr[0]);
 	    						res.status(200);
 	    						res.send(arr[0]);
 	    					}
