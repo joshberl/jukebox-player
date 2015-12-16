@@ -42,7 +42,7 @@ $( document ).ready(function() {
 			var queue = document.getElementById('queue');
 			var player_group = document.getElementById('player_group');
 			queue.innerHTML = '<div id="empty_queue"><div id="empty_queue_text">Queue currently empty. Search a song to add to the queue.</div></div>';
-			player_group.innerHTML = "";
+			player_group.innerHTML = '<div id="player"></div><div id="skipper"></div>';
 			player_exists = false;
 		}
 	});
