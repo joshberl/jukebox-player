@@ -6,7 +6,6 @@ jQuery(document).ready(function() {
     else {
     	document.body.style.backgroundImage = "url('/../bootstrap/login/assets/img/backgrounds/Homepage_bg.jpg')";
     	document.body.style.backgroundRepeat = "repeat-y";
-
     }
 
 });
