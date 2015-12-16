@@ -29,7 +29,24 @@ $( document ).ready(function() {
 				queue.innerHTML += "<div class=queue_elem style='background-image: url(" + data.queue[i].art[0].url + ")';><span class='queue_elem_text'>" + data['queue'][i]['title'] + " – " + data['queue'][i]['artist'] + " - " + data['queue'][i]['album'] + "</span></div>";
 			}
 		}
-	})
+	});
+
+	window.setInterval(function(){
+		$.get('/currentqueue?code=' + document.getElementById('code').innerHTML, function(data, status) {
+			if (data.queue[0] != null) {
+				var queue = document.getElementById('queue');
+				queue.innerHTML = "";
+				for (var i = 0; i < data.queue.length; i++) {
+					queue.innerHTML += "<div class=queue_elem style='background-image: url(" + data.queue[i].art[0].url + ")';><span class='queue_elem_text'>" + data['queue'][i]['title'] + " – " + data['queue'][i]['artist'] + " - " + data['queue'][i]['album'] + "</span></div>";
+				}
+			}
+			else {
+				var queue = document.getElementById('queue');
+				queue.innerHTML = '<div id="empty_queue"><div id="empty_queue_text">Queue currently empty. Search a song to add to the queue.</div></div>';
+
+			}
+		});
+	}, 30000);
 
 });
 

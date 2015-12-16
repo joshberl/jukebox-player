@@ -116,6 +116,7 @@
 .queue_elem_text {
 	display: inline-block;
 	color: #71fa7b;
+	text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
 	text-align: left;
 	line-height: normal;
 	position: absolute;

@@ -3,6 +3,8 @@ $('input').change(function() {
 	$('input').val('');
 });
 
+var player_exists = false;
+
 $( document ).ready(function() {
 	var search = window.location['search'];
 	var code = "";
@@ -32,14 +34,45 @@ $( document ).ready(function() {
 				queue.innerHTML += "<div class=queue_elem style='background-image: url(" + data.queue[i].art[0].url + ")';><span class='queue_elem_text'>" + data['queue'][i]['title'] + " – " + data['queue'][i]['artist'] + " - " + data['queue'][i]['album'] + "</span></div>";
 			}
 			load_player(data);
+			player_exists = true;
 		}
 		else if (data.queue[0] == null) {
 			var queue = document.getElementById('queue');
 			var player_group = document.getElementById('player_group');
 			queue.innerHTML = '<div id="empty_queue"><div id="empty_queue_text">Queue currently empty. Search a song to add to the queue.</div></div>';
 			player_group.innerHTML = "";
+			player_exists = false;
 		}
-	})
+	});
+
+	window.setInterval(function(){
+		$.get('/currentqueue?code=' + document.getElementById('code').innerHTML, function(data, status) {
+			if (data.queue[0] != null) {
+				var queue = document.getElementById('queue');
+				if (data.queue.length == 1) {
+					queue.innerHTML = "";
+					var skipper = document.getElementById('skipper');
+					skipper.innerHTML = '<button class="skipbtn" onclick=skip_song()>Skip to Next Song</button>';
+					if (!player_exists) {
+						load_player(data);
+						player_exists = true;
+					};
+				}
+				else {
+					queue.innerHTML = "";
+					for (var i = 1; i < data.queue.length; i++) {
+						queue.innerHTML += "<div class=queue_elem style='background-image: url(" + data.queue[i].art[0].url + ")';><span class='queue_elem_text'>" + data['queue'][i]['title'] + " – " + data['queue'][i]['artist'] + " - " + data['queue'][i]['album'] + "</span></div>";
+					}
+				}
+			}
+			else if (data.queue[0] == null) {
+				var queue = document.getElementById('queue');
+				var player_group = document.getElementById('player_group');
+				queue.innerHTML = '<div id="empty_queue"><div id="empty_queue_text">Queue currently empty. Search a song to add to the queue.</div></div>';
+				player_group.innerHTML = '<div id="player"></div><div id="skipper"></div>';
+			}
+		});
+	}, 30000);
 });
 
 var skip_song = function() {
@@ -56,7 +89,8 @@ var skip_song = function() {
 			var queue = document.getElementById('queue');
 			var player_group = document.getElementById('player_group');
 			queue.innerHTML = '<div id="empty_queue"><div id="empty_queue_text">Queue currently empty. Search a song to add to the queue.</div></div>';
-			player_group.innerHTML = "";
+			player_group.innerHTML = '<div id="player"></div><div id="skipper"></div>';
+			player_exists = false;
 		}
 	});
 }
@@ -117,9 +151,11 @@ var addtoqueue = function(id) {
 			queue.innerHTML += "<div class=queue_elem style='background-image: url(" + data.queue[i].art[0].url + ")';><span class='queue_elem_text'>" + data['queue'][i]['title'] + " – " + data['queue'][i]['artist'] + " - " + data['queue'][i]['album'] + "</span></div>";
 		}
 		if (data.queue.length == 1) {
-			var player_group = document.getElementById('player_group');
-			player_group.innerHTML = '<div id="player"></div><button class="skipbtn" onclick=skip_song()>Skip to Next Song</button>';
-			load_player(data);
+			var skipper = document.getElementById('skipper');
+			skipper.innerHTML = '<button class="skipbtn" onclick=skip_song()>Skip to Next Song</button>';
+			if (!player_exists) {
+				load_player(data);
+			}
 		}
 	});
 };
